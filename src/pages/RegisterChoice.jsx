@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import "../css/RegisterChoice.css";
 
+
 function RegisterChoice() {
   const navigate = useNavigate();
 

@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import api from "../api";
 
 export default function Applicants() {
   const { jobId } = useParams();
   const [apps, setApps] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8000/api/job-applicants/${jobId}/`)
+    api
+      .get(`/api/job-applicants/${jobId}/`)
       .then((res) => setApps(res.data))
       .catch((err) => console.error(err));
   }, [jobId]);
 
   const updateStatus = async (id, status) => {
-    await axios.post(
-      `http://localhost:8000/api/update-application/${id}/`,
+    await api.post(
+      `/api/update-application/${id}/`,
       { status }
     );
     alert("Updated!");

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../css/JobPost.css";
+import api from "../api";
+
 
 export default function JobPost() {
   const navigate = useNavigate();
@@ -57,8 +59,8 @@ export default function JobPost() {
     try {
       if (isEdit) {
         // 🔥 UPDATE JOB
-        await axios.put(
-          `http://localhost:8000/api/employer/job/update-job/${editJob.id}/`,
+        await api.put(
+          `/api/employer/job/update-job/${editJob.id}/`,
           formData,
           { withCredentials: true }
         );
@@ -66,8 +68,8 @@ export default function JobPost() {
         alert("Job updated successfully!");
       } else {
         // 🔥 CREATE JOB
-        await axios.post(
-          "http://localhost:8000/api/employer/post-job/",
+        await api.post(
+          "/api/employer/post-job/",
           formData,
           { withCredentials: true }
         );

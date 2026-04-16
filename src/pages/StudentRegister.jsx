@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/StudentRegister.css";
 
+import api from "../api";
+
 function StudentRegister() {
   const navigate = useNavigate();
 
@@ -32,21 +34,8 @@ function StudentRegister() {
     }
 
     try {
-      const res = await fetch("http://localhost:8000/api/student-register/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(form),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        alert(data.error || "Request failed");
-        return;
-      }
+      // ✅ FIXED: use api.js instead of fetch + localhost
+      const res = await api.post("/api/student-register/", form);
 
       alert("Registration successful!");
 
@@ -55,7 +44,8 @@ function StudentRegister() {
       }, 300);
 
     } catch (err) {
-      alert(err.message);
+      console.error(err);
+      alert(err.response?.data?.error || err.message);
     }
   };
 
@@ -69,7 +59,6 @@ function StudentRegister() {
 
         <div className="stu-form">
 
-          {/* USERNAME (UPDATED LABEL) */}
           <input
             name="username"
             placeholder="Username"
@@ -77,7 +66,6 @@ function StudentRegister() {
             className="stu-input"
           />
 
-          {/* EMAIL */}
           <input
             name="email"
             type="email"
@@ -86,7 +74,6 @@ function StudentRegister() {
             className="stu-input"
           />
 
-          {/* PASSWORD */}
           <input
             name="password"
             type="password"
@@ -95,7 +82,6 @@ function StudentRegister() {
             className="stu-input"
           />
 
-          {/* FULL NAME */}
           <input
             name="nama_penuh"
             placeholder="Full Name"
@@ -103,7 +89,6 @@ function StudentRegister() {
             className="stu-input"
           />
 
-          {/* MATRIC */}
           <input
             name="no_matrik"
             placeholder="Matric Number"
@@ -111,7 +96,6 @@ function StudentRegister() {
             className="stu-input"
           />
 
-          {/* PHONE */}
           <input
             name="no_telefon"
             placeholder="Phone Number"
@@ -119,7 +103,6 @@ function StudentRegister() {
             className="stu-input"
           />
 
-          {/* FAKULTI */}
           <select
             name="fakulti"
             onChange={handleChange}
@@ -140,7 +123,6 @@ function StudentRegister() {
             <option value="fpep">FPEP</option>
           </select>
 
-          {/* KOLEJ */}
           <select
             name="kolej"
             onChange={handleChange}

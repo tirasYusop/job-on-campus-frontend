@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../css/StudentDashboard.css";
 import logo from "../images/LOGOMPP.png";
+import api from "../api";
 
 export default function StudentDashboard() {
   const [openSection, setOpenSection] = useState(null);
@@ -35,7 +36,7 @@ export default function StudentDashboard() {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/api/jobs/");
+        const res = await api.get("/api/jobs/");
         setJobs(res.data);
       } catch (err) {
         console.error(err);
@@ -64,8 +65,8 @@ export default function StudentDashboard() {
   useEffect(() => {
     const fetchApplications = async () => {
       try {
-        const res = await axios.get(
-          "http://localhost:8000/api/student-applications/",
+        const res = await api.get(
+          "/api/student-applications/",
           { withCredentials: true }
         );
         setApplications(res.data);
@@ -81,14 +82,14 @@ export default function StudentDashboard() {
 
   const applyJob = async (jobId) => {
     try {
-      await axios.post(
-        `http://localhost:8000/api/apply-job/${jobId}/`,
+      await api.post(
+        `/api/apply-job/${jobId}/`,
         {},
         { withCredentials: true }
       );
 
-      const res = await axios.get(
-        "http://localhost:8000/api/student-applications/",
+      const res = await api.get(
+        "/api/student-applications/",
         { withCredentials: true }
       );
 
@@ -103,8 +104,8 @@ export default function StudentDashboard() {
   // =========================
   const cancelApplication = async (jobId) => {
     try {
-      await axios.delete(
-        `http://localhost:8000/api/cancel-application/${jobId}/`,
+      await api.delete(
+        `/api/cancel-application/${jobId}/`,
         { withCredentials: true }
       );
 
@@ -120,8 +121,8 @@ export default function StudentDashboard() {
   // LOGOUT
   // =========================
   const handleLogout = async () => {
-    await axios.post(
-      "http://localhost:8000/api/logout/",
+      await api.post(
+      "/api/logout/",
       {},
       { withCredentials: true }
     );
@@ -148,8 +149,8 @@ export default function StudentDashboard() {
     if (!feedbackText.trim()) return;
 
     try {
-      await axios.post(
-        `http://localhost:8000/api/student/submit-feedback/${feedbackAppId}/`,
+      await api.post(
+        `/api/student/submit-feedback/${feedbackAppId}/`,
         { feedback: feedbackText },
         { withCredentials: true }
       );
@@ -160,8 +161,8 @@ export default function StudentDashboard() {
       setFeedbackText("");
 
       // refresh
-      const res = await axios.get(
-        "http://localhost:8000/api/student-applications/",
+      const res = await api.get(
+        "/api/student-applications/",
         { withCredentials: true }
       );
       setApplications(res.data);
@@ -182,8 +183,6 @@ export default function StudentDashboard() {
 
   return (
     <div className="dashboard-layout">
-
-      {/* ================= TOP BAR ================= */}
       <div className="navbar">
         <div className="nav-left">
           <div className="logo">
@@ -199,14 +198,8 @@ export default function StudentDashboard() {
           </button>
         </div>
       </div>
-
-      {/* ================= MAIN (70/30) ================= */}
       <div className="dashboard-body">
-
-        {/* ============ LEFT CONTENT (70%) ============ */}
         <div className="dashboard-content">
-
-          {/* SEARCH */}
           <div className="search-bar">
             <input
               type="text"
@@ -215,8 +208,6 @@ export default function StudentDashboard() {
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
-
-          {/* JOB LIST */}
           <div className="container-joblist">
 
             {[...filteredJobs]
@@ -272,8 +263,6 @@ export default function StudentDashboard() {
               })}
           </div>
         </div>
-
-  {/* ============ RIGHT NOTIFICATION (30%) ============ */}
         <div className="dashboard-notification">
 
           <h3>DASHBOARD</h3>
@@ -289,7 +278,7 @@ export default function StudentDashboard() {
                 key={a.id}
                 style={{ cursor: "pointer" }}
                 onClick={async () => {
-                  const res = await axios.get("http://localhost:8000/api/jobs/");
+                  const res = await api.get("/api/jobs/");
                   const job = res.data.find(j => j.id === a.job_id);
                   if (job) setSelectedJob(job);
                 }}
@@ -362,8 +351,6 @@ export default function StudentDashboard() {
         </div>
       </div>
 
-      
-      {/* ================= FEEDBACK MODAL ================= */}
       {feedbackAppId && (
         <div className="modal-overlay" onClick={() => setFeedbackAppId(null)}>
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
@@ -394,7 +381,6 @@ export default function StudentDashboard() {
         </div>
       )}
 
-      {/* ================= APPLY MODAL ================= */}
       {confirmJob && (
         <div className="modal-overlay" onClick={() => setConfirmJob(null)}>
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
@@ -424,8 +410,6 @@ export default function StudentDashboard() {
           </div>
         </div>
       )}
-
-      {/* ================= CANCEL MODAL ================= */}
       {confirmCancel && (
         <div className="modal-overlay" onClick={() => setConfirmCancel(null)}>
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
@@ -455,7 +439,6 @@ export default function StudentDashboard() {
         </div>
       )}
 
-      {/* ================= JOB DETAILS MODAL ================= */}
       {selectedJob && (
         <div className="modal-overlay" onClick={() => setSelectedJob(null)}>
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>

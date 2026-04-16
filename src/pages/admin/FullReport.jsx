@@ -12,6 +12,7 @@ import {
 } from "chart.js";
 
 import "../../css/AdminPages.css";
+import api from "../api";
 
 ChartJS.register(
   CategoryScale,
@@ -30,23 +31,20 @@ function FullReport() {
   const [modalType, setModalType] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/admin/full-report/")
-      .then(res => res.json())
-      .then(setData)
+    api.get("/admin/full-report/")
+      .then(res => setData(res.data))
       .catch(err => console.error(err));
   }, []);
 
   const openFeedback = async () => {
-    const res = await fetch("http://localhost:8000/api/admin/feedback-list/");
-    const result = await res.json();
-    setFeedbackList(result);
+    const res = await api.get("/admin/feedback-list/");
+    setFeedbackList(res.data);
     setModalType("feedback");
   };
 
   const openComplaint = async () => {
-    const res = await fetch("http://localhost:8000/api/admin/complaint-list/");
-    const result = await res.json();
-    setComplaintList(result);
+    const res = await api.get("/admin/complaint-list/");
+    setComplaintList(res.data);
     setModalType("complaint");
   };
 
@@ -137,7 +135,7 @@ function FullReport() {
         <div className="chart-card"><h3>🏫 College Distribution</h3><Pie data={collegeChart} /></div>
       </div>
 
-      {/* ✅ MODAL FIXED (INSIDE RETURN) */}
+      {/* MODAL */}
       {modalType && (
         <div className="modal-backdrop" onClick={() => setModalType(null)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>

@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
+import api from "../api";
 
 function UsersPage() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/admin/users/")
-      .then(res => res.json())
-      .then(data => setUsers(data));
+    api.get("/admin/users/")
+      .then(res => setUsers(res.data))
+      .catch(err => console.error(err));
   }, []);
 
   return (
@@ -15,7 +16,9 @@ function UsersPage() {
 
       {users.map(u => (
         <div key={u.id}>
-          <p>{u.username} ({u.role}) - {u.verified ? "✅ Verified" : "❌"}</p>
+          <p>
+            {u.username} ({u.role}) - {u.verified ? "✅ Verified" : "❌"}
+          </p>
         </div>
       ))}
     </div>

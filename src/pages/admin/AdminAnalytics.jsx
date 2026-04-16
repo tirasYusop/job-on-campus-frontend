@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Bar, Pie } from "react-chartjs-2";
+import api from "../api";
 
 import {
   Chart as ChartJS,
@@ -37,9 +38,9 @@ export default function AdminAnalytics() {
         trendRes,
         jobTypeRes
       ] = await Promise.all([
-        axios.get("http://127.0.0.1:8000/api/analytics/overview/"),
-        axios.get("http://127.0.0.1:8000/api/analytics/trend/"),
-        axios.get("http://127.0.0.1:8000/api/analytics/job-types/")
+        api.get("/api/analytics/overview/"),
+        api.get("/api/analytics/trend/"),
+        api.get("/api/analytics/job-types/")
       ]);
 
       setOverview(overviewRes.data);

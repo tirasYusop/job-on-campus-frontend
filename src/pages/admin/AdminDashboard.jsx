@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../css/AdminDashboard.css";
+import api from "../api";
 
 function AdminDashboard() {
   const navigate = useNavigate();
@@ -16,10 +17,7 @@ function AdminDashboard() {
 
   // LOGOUT
   const handleLogout = async () => {
-    await fetch("http://localhost:8000/api/logout/", {
-      method: "POST",
-      credentials: "include",
-    });
+    await api.post("/logout/");
 
     localStorage.removeItem("role");
     navigate("/");
@@ -27,17 +25,14 @@ function AdminDashboard() {
 
   // FETCH UNVERIFIED
   const fetchEmployers = async () => {
-    const res = await fetch("http://localhost:8000/api/admin/employers/unverified/");
-    const data = await res.json();
-    setEmployers(data);
+    const res = await api.get("/admin/employers/unverified/");
+    setEmployers(res.data);
   };
 
-  // FETCH STATS (NEW 🔥)
+  // FETCH STATS
   const fetchStats = async () => {
-    const res = await fetch("http://localhost:8000/api/admin/full-report/");
-    const data = await res.json();
-
-    setStats(data);
+    const res = await api.get("/admin/full-report/");
+    setStats(res.data);
   };
 
   useEffect(() => {
@@ -46,9 +41,7 @@ function AdminDashboard() {
   }, []);
 
   const verifyEmployer = async (id) => {
-    await fetch(`http://localhost:8000/api/admin/verify-employer/${id}/`, {
-      method: "POST",
-    });
+    await api.post(`/admin/verify-employer/${id}/`);
 
     alert("Employer verified!");
     fetchEmployers();
@@ -76,9 +69,6 @@ function AdminDashboard() {
       {/* CONTENT */}
       <div className="admin-content">
 
-        {/* =========================
-            KPI DASHBOARD
-        ========================= */}
         <div className="kpi-grid">
 
           <div className="kpi-card">
@@ -103,9 +93,6 @@ function AdminDashboard() {
 
         </div>
 
-        {/* =========================
-            QUICK ACTIONS
-        ========================= */}
         <div className="quick-actions">
 
           <div className="action-card" onClick={() => navigate("/admin/student-report")}>
@@ -122,9 +109,6 @@ function AdminDashboard() {
 
         </div>
 
-        {/* =========================
-            UNVERIFIED EMPLOYERS
-        ========================= */}
         <h2 className="section-title">⛔ Pending Employers</h2>
 
         <div className="grid">

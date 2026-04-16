@@ -1,21 +1,26 @@
 import { useEffect, useState } from "react";
 import "../../css/AdminPages.css";
+import api from "../api";
 
 function EmployersPage() {
   const [employers, setEmployers] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [status, setStatus] = useState("ALL");
 
-  // ✅ NEW: modal state
   const [selectedEmployer, setSelectedEmployer] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/admin/employers/")
-      .then(res => res.json())
-      .then(data => {
-        setEmployers(data);
-        setFiltered(data);
-      });
+    const fetchData = async () => {
+      try {
+        const res = await api.get("/admin/employers/");
+        setEmployers(res.data);
+        setFiltered(res.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -31,7 +36,6 @@ function EmployersPage() {
   return (
     <div className="admin-page">
 
-      {/* HEADER */}
       <div className="admin-header">
         <h2>🏢 Employers Management</h2>
 
@@ -46,7 +50,6 @@ function EmployersPage() {
         </select>
       </div>
 
-      {/* TABLE */}
       <div className="table-container">
         <table>
           <thead>
@@ -63,7 +66,7 @@ function EmployersPage() {
               <tr
                 key={e.id}
                 style={{ cursor: "pointer" }}
-                onClick={() => setSelectedEmployer(e)}   // ✅ OPEN MODAL
+                onClick={() => setSelectedEmployer(e)}
               >
                 <td>{e.company_name}</td>
                 <td>{e.username}</td>
@@ -80,7 +83,6 @@ function EmployersPage() {
           </tbody>
         </table>
       </div>
-
 
       {selectedEmployer && (
         <div className="modal-overlay" onClick={() => setSelectedEmployer(null)}>

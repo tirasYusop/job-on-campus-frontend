@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "../../css/AdminPages.css";
+import api from "../api";
 
 function StudentsPage() {
   const [students, setStudents] = useState([]);
@@ -7,15 +8,15 @@ function StudentsPage() {
   const [faculty, setFaculty] = useState("ALL");
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/admin/students/")
-      .then(res => res.json())
-      .then(data => {
-        setStudents(data);
-        setFiltered(data);
-      });
+    api.get("/admin/students/")
+      .then(res => {
+        setStudents(res.data);
+        setFiltered(res.data);
+      })
+      .catch(err => console.error(err));
   }, []);
 
-  // 🎯 FILTER LOGIC
+  // 🎯 FILTER LOGIC (unchanged)
   useEffect(() => {
     if (faculty === "ALL") {
       setFiltered(students);

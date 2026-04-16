@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "../../css/AdminPages.css";
+import api from "../api";
 
 function EmployersPage() {
   const [employers, setEmployers] = useState([]);
@@ -7,12 +8,17 @@ function EmployersPage() {
   const [status, setStatus] = useState("ALL");
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/admin/employers/")
-      .then(res => res.json())
-      .then(data => {
-        setEmployers(data);
-        setFiltered(data);
-      });
+    const fetchData = async () => {
+      try {
+        const res = await api.get("/admin/employers/");
+        setEmployers(res.data);
+        setFiltered(res.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchData();
   }, []);
 
   // 🎯 FILTER LOGIC

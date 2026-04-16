@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/Login.css";
+import api from "../api";
+
 
 function Login() {
   const navigate = useNavigate();
@@ -9,41 +11,29 @@ function Login() {
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
-    try {
-      const res = await fetch("http://localhost:8000/api/login/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({
-          login_id: loginId,   // ✅ Student ID / Username / Email
+      try {
+        const res = await api.post("/login/", {
+          login_id: loginId,
           password: password
-        }),
-      });
+        });
 
-      const data = await res.json();
+        const data = res.data;
 
-      if (!res.ok) {
-        alert(data.error || "Login failed");
-        return;
+        localStorage.setItem("role", data.role);
+        localStorage.setItem("user", JSON.stringify(data));
+
+        if (data.role === "admin") {
+          navigate("/admin-dashboard");
+        } else if (data.role === "student") {
+          navigate("/student-dashboard");
+        } else if (data.role === "employer") {
+          navigate("/employer-dashboard");
+        }
+
+      } catch (err) {
+        alert(err.response?.data?.error || "Login failed");
       }
-
-      // save session
-      localStorage.setItem("role", data.role);
-      localStorage.setItem("user", JSON.stringify(data));
-
-      // redirect based on role
-      if (data.role === "admin") {
-        navigate("/admin-dashboard");
-      } else if (data.role === "student") {
-        navigate("/student-dashboard");
-      } else if (data.role === "employer") {
-        navigate("/employer-dashboard");
-      }
-
-    } catch (err) {
-      alert("Server error");
-    }
-  };
+    };
 
   return (
     <div className="login-page">

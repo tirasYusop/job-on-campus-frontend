@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../css/EmployerDashboard.css";
 import logo from "../images/LOGOMPP.png";
+import api from "../api";
 
 export default function EmployerDashboard() {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ export default function EmployerDashboard() {
   const [complaintAppId, setComplaintAppId] = useState(null);
   const fetchVerificationStatus = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/employer-status/", {
+      const res = await api.get("/api/employer-status/", {
         withCredentials: true,
       });
       setVerified(res.data.verified);
@@ -27,7 +28,7 @@ export default function EmployerDashboard() {
 
   const fetchJobs = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/employer-jobs/", {
+      const res = await api.get("/api/employer-jobs/", {
         withCredentials: true,
       });
       setJobs(res.data);
@@ -50,13 +51,15 @@ export default function EmployerDashboard() {
   }, []);
 
   const handleLogout = async () => {
-    await fetch("http://localhost:8000/api/logout/", {
-      method: "POST",
-      credentials: "include",
-    });
+    try {
+      await api.post("/logout/");
 
-    localStorage.clear();
-    navigate("/");
+      localStorage.clear();
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+      alert("Logout failed");
+    }
   };
 
   const handlePostJob = () => {
@@ -69,8 +72,8 @@ export default function EmployerDashboard() {
 
   const updateApplication = async (id, action) => {
     try {
-      const res = await axios.post(
-        `http://localhost:8000/api/confirm-application/${id}/`,
+      const res = await api.post(
+        `/api/confirm-application/${id}/`,
         { action },
         { withCredentials: true }
       );
@@ -103,8 +106,8 @@ export default function EmployerDashboard() {
       }
 
       try {
-          await axios.post(
-            `http://localhost:8000/api/employer/student-report/${complaintAppId}`,
+          await api.post(
+            `/api/employer/student-report/${complaintAppId}`,
             {
               complaint: complaintText.trim(),
             },
@@ -145,8 +148,8 @@ export default function EmployerDashboard() {
     if (!window.confirm("Delete this job?")) return;
 
     try {
-      await axios.delete(
-        `http://localhost:8000/api/employer/job/delete-job/${jobId}/`,
+      await api.delete(
+        `/api/employer/job/delete-job/${jobId}/`,
         { withCredentials: true }
       );
 

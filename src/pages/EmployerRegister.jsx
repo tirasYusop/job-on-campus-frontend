@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/EmployerRegister.css";
+import api from "../api";
 
 function EmployerRegister() {
   const navigate = useNavigate();
@@ -23,7 +24,6 @@ function EmployerRegister() {
 
   const handleRegister = async () => {
 
-    // 🔥 FRONTEND VALIDATION
     if (!form.username.trim()) return alert("Username is required");
     if (!form.email.trim()) return alert("Email is required");
     if (!form.email.includes("@")) return alert("Invalid email format");
@@ -35,35 +35,20 @@ function EmployerRegister() {
     if (!form.phone_number.trim()) return alert("Phone number is required");
 
     try {
-      const res = await fetch("http://localhost:8000/api/employer-register/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          username: form.username.trim(),
-          email: form.email.trim(),
-          password: form.password,
-          full_name: form.full_name.trim(),
-          company_name: form.company_name.trim(),
-          phone_number: form.phone_number.trim()
-        }),
+      const res = await api.post("/employer-register/", {
+        username: form.username.trim(),
+        email: form.email.trim(),
+        password: form.password,
+        full_name: form.full_name.trim(),
+        company_name: form.company_name.trim(),
+        phone_number: form.phone_number.trim()
       });
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        alert(data.error || "Registration failed");
-        return;
-      }
-
       alert("Employer registered & logged in!");
-
       navigate("/employer-dashboard");
 
     } catch (err) {
-      alert("Server error: " + err.message);
+      alert(err.response?.data?.error || "Registration failed");
     }
   };
 
