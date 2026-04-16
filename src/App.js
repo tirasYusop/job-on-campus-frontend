@@ -13,7 +13,6 @@ import EmployerDashboard from "./pages/EmployerDashboard";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import JobPost from "./pages/JobPost";
 
-import UsersPage from "./pages/admin/UsersPage";
 import EmployersPage from "./pages/admin/EmployersPage";
 import StudentReport from "./pages/admin/StudentReport";
 import EmployerReport from "./pages/admin/EmployerReport";
