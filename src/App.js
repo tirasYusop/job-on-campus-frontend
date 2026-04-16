@@ -39,9 +39,6 @@ function App() {
         <Route path="/employer-dashboard" element={<EmployerDashboard />} />
 
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
-        <Route path="/admin/users" element={<div>Users Page</div>} />
-        <Route path="/admin/employers" element={<div>Employers Page</div>} />
-        <Route path="/admin/reports" element={<div>Reports Page</div>} />
         <Route path="/employer/job-form" element={<JobPost />} />
         <Route path="/post-job" element={<JobPost />} />
         <Route path="/student-dashboard/job/:id" element={<div>Job Details Page</div>} />  

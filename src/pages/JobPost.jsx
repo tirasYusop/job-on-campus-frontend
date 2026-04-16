@@ -1,9 +1,20 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../css/JobPost.css";
 import api from "../api";
 
+const emptyForm = {
+  job_type: "",
+  business_type: "",
+  phone: "",
+  location: "",
+  start_date: "",
+  end_date: "",
+  work_time: "",
+  salary_estimate: "",
+  num_workers: "",
+  criteria: "",
+};
 
 export default function JobPost() {
   const navigate = useNavigate();
@@ -12,23 +23,9 @@ export default function JobPost() {
   const editJob = location.state || null;
   const isEdit = !!editJob;
 
-  // ✅ EMPTY TEMPLATE (IMPORTANT)
-  const emptyForm = {
-    job_type: "",
-    business_type: "",
-    phone: "",
-    location: "",
-    start_date: "",
-    end_date: "",
-    work_time: "",
-    salary_estimate: "",
-    num_workers: "",
-    criteria: "",
-  };
-
   const [formData, setFormData] = useState(emptyForm);
 
-  // ✅ AUTO FILL (EDIT MODE) + RESET (CREATE MODE)
+  // ✅ FIXED useEffect (no ESLINT warning)
   useEffect(() => {
     if (isEdit) {
       setFormData({
@@ -58,7 +55,6 @@ export default function JobPost() {
 
     try {
       if (isEdit) {
-        // 🔥 UPDATE JOB
         await api.put(
           `/api/employer/job/update-job/${editJob.id}/`,
           formData,
@@ -67,7 +63,6 @@ export default function JobPost() {
 
         alert("Job updated successfully!");
       } else {
-        // 🔥 CREATE JOB
         await api.post(
           "/api/employer/post-job/",
           formData,
@@ -88,9 +83,7 @@ export default function JobPost() {
   return (
     <div className="job-page">
 
-      {/* NAVBAR */}
       <div className="job-navbar">
-
         <div className="nav-left">
           <button onClick={() => navigate("/employer-dashboard")}>
             ← Back
@@ -100,12 +93,9 @@ export default function JobPost() {
         <div className="nav-center">
           <h3>{isEdit ? "Edit Job" : "Post Job"}</h3>
         </div>
-
       </div>
 
-      {/* FORM */}
       <div className="job-container">
-
         <div className="job-card">
 
           <h1 className="job-title">
@@ -204,7 +194,6 @@ export default function JobPost() {
           </form>
 
         </div>
-
       </div>
 
     </div>

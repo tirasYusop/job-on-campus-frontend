@@ -34,8 +34,8 @@ function StudentRegister() {
     }
 
     try {
-      // ✅ FIXED: use api.js instead of fetch + localhost
-      const res = await api.post("/api/student-register/", form);
+      // ✅ FIX: removed unused "res"
+      await api.post("/api/student-register/", form);
 
       alert("Registration successful!");
 
