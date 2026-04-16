@@ -34,7 +34,8 @@ function EmployerRegister() {
     if (!form.phone_number.trim()) return alert("Phone number is required");
 
     try {
-      await api.post("/employer-register/", {
+      await api.post("api/employer-register/",data, { withCredentials: true } , {
+
         username: form.username.trim(),
         email: form.email.trim(),
         password: form.password,
