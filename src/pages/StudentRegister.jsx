@@ -24,28 +24,29 @@ function StudentRegister() {
 
   const handleRegister = async () => {
     if (!form.email.endsWith("@iluv.ums.edu.my")) {
-      alert("Only UMS student email allowed (@iluv.ums.edu.my)");
-      return;
-    }
-
-    if (!form.username || !form.password) {
-      alert("Username and password required");
+      alert("Only UMS student email allowed");
       return;
     }
 
     try {
-      // ✅ FIX: removed unused "res"
-      await api.post("/api/student-register/", form);
+      const res = await api.post(
+        "/api/student-register/",
+        form,
+        { withCredentials: true }
+      );
+
+      const data = res.data;
+
+      localStorage.setItem("role", data.role);
+      localStorage.setItem("user", JSON.stringify(data));
 
       alert("Registration successful!");
 
-      setTimeout(() => {
-        navigate("/student-dashboard");
-      }, 300);
+      navigate("/student-dashboard");
 
     } catch (err) {
-      console.error(err);
-      alert(err.response?.data?.error || err.message);
+      console.log(err);
+      alert(err.response?.data?.error || "Registration failed");
     }
   };
 
