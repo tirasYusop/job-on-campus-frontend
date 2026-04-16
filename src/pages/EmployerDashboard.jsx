@@ -15,7 +15,7 @@ export default function EmployerDashboard() {
   const [complaintAppId, setComplaintAppId] = useState(null);
   const fetchVerificationStatus = async () => {
     try {
-      const res = await api.get("/api/employer-status/", {
+      const res = await api.get("/employer-status/", {
         withCredentials: true,
       });
       setVerified(res.data.verified);
@@ -27,7 +27,7 @@ export default function EmployerDashboard() {
 
   const fetchJobs = async () => {
     try {
-      const res = await api.get("/api/employer-jobs/", {
+      const res = await api.get("/employer-jobs/", {
         withCredentials: true,
       });
       setJobs(res.data);
@@ -51,7 +51,7 @@ export default function EmployerDashboard() {
 
   const handleLogout = async () => {
     try {
-      await api.post("api/logout/");
+      await api.post("/logout/");
 
       localStorage.clear();
       navigate("/");
@@ -66,13 +66,13 @@ export default function EmployerDashboard() {
       alert("Your account is not verified yet.");
       return;
     }
-    navigate("api/employer/job-form");
+    navigate("/employer/job-form");
   };
 
   const updateApplication = async (id, action) => {
     try {
       const res = await api.post(
-        `/api/confirm-application/${id}/`,
+        `/confirm-application/${id}/`,
         { action },
         { withCredentials: true }
       );
@@ -106,7 +106,7 @@ export default function EmployerDashboard() {
 
       try {
           await api.post(
-            `/api/employer/student-report/${complaintAppId}`,
+            `/employer/student-report/${complaintAppId}`,
             {
               complaint: complaintText.trim(),
             },
@@ -148,7 +148,7 @@ export default function EmployerDashboard() {
 
     try {
       await api.delete(
-        `/api/employer/job/delete-job/${jobId}/`,
+        `/employer/job/delete-job/${jobId}/`,
         { withCredentials: true }
       );
 
@@ -161,7 +161,7 @@ export default function EmployerDashboard() {
 
   // ✏️ EDIT JOB
   const handleEditJob = (job) => {
-    navigate(`api/employer/job-form`, { state: job }); // pass job data
+    navigate(`/employer/job-form`, { state: job }); // pass job data
   };
 
   return (
