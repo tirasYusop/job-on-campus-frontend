@@ -51,7 +51,7 @@ export default function EmployerDashboard() {
 
   const handleLogout = async () => {
     try {
-      await api.post("/logout/");
+      await api.post("api/logout/");
 
       localStorage.clear();
       navigate("/");
@@ -66,7 +66,7 @@ export default function EmployerDashboard() {
       alert("Your account is not verified yet.");
       return;
     }
-    navigate("/employer/job-form");
+    navigate("api/employer/job-form");
   };
 
   const updateApplication = async (id, action) => {
@@ -161,7 +161,7 @@ export default function EmployerDashboard() {
 
   // ✏️ EDIT JOB
   const handleEditJob = (job) => {
-    navigate(`/employer/job-form`, { state: job }); // pass job data
+    navigate(`api/employer/job-form`, { state: job }); // pass job data
   };
 
   return (
