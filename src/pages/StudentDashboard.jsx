@@ -65,7 +65,7 @@ export default function StudentDashboard() {
     const fetchApplications = async () => {
       try {
         const res = await api.get(
-          "/api/student-applications/",
+          "/student-applications/",
           { withCredentials: true }
         );
         setApplications(res.data);
@@ -82,13 +82,13 @@ export default function StudentDashboard() {
   const applyJob = async (jobId) => {
     try {
       await api.post(
-        `/api/apply-job/${jobId}/`,
+        `/apply-job/${jobId}/`,
         {},
         { withCredentials: true }
       );
 
       const res = await api.get(
-        "/api/student-applications/",
+        "/student-applications/",
         { withCredentials: true }
       );
 
@@ -104,7 +104,7 @@ export default function StudentDashboard() {
   const cancelApplication = async (jobId) => {
     try {
       await api.delete(
-        `/api/cancel-application/${jobId}/`,
+        `/cancel-application/${jobId}/`,
         { withCredentials: true }
       );
 
@@ -121,7 +121,7 @@ export default function StudentDashboard() {
   // =========================
   const handleLogout = async () => {
       await api.post(
-      "/api/logout/",
+      "/logout/",
       {},
       { withCredentials: true }
     );
@@ -149,7 +149,7 @@ export default function StudentDashboard() {
 
     try {
       await api.post(
-        `/api/student/submit-feedback/${feedbackAppId}/`,
+        `/student/submit-feedback/${feedbackAppId}/`,
         { feedback: feedbackText },
         { withCredentials: true }
       );
@@ -161,7 +161,7 @@ export default function StudentDashboard() {
 
       // refresh
       const res = await api.get(
-        "/api/student-applications/",
+        "/student-applications/",
         { withCredentials: true }
       );
       setApplications(res.data);

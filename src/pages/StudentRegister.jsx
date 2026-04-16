@@ -30,7 +30,7 @@ function StudentRegister() {
 
     try {
       const res = await api.post(
-        "/api/student-register/",
+        "/student-register/",
         form,
         { withCredentials: true }
       );
