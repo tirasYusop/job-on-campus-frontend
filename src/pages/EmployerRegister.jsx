@@ -35,7 +35,7 @@ function EmployerRegister() {
 
     try {
       await api.post(
-        "/api/employer-register/",
+        "/employer-register/",
         {
           username: form.username.trim(),
           email: form.email.trim(),
