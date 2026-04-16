@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "../../css/AdminPages.css";
-import api from "../api";
+import api from "../../api";
 
 function StudentsPage() {
   const [students, setStudents] = useState([]);

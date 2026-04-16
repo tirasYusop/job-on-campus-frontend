@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Bar, Pie } from "react-chartjs-2";
-import api from "../api";
+import api from "../../api";
 
 import {
   Chart as ChartJS,

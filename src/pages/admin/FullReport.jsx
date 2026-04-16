@@ -12,7 +12,7 @@ import {
 } from "chart.js";
 
 import "../../css/AdminPages.css";
-import api from "../api";
+import api from "../../api";
 
 ChartJS.register(
   CategoryScale,
