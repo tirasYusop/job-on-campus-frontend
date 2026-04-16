@@ -12,8 +12,6 @@ import EmployerDashboard from "./pages/EmployerDashboard";
 
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import JobPost from "./pages/JobPost";
-
-import EmployersPage from "./pages/admin/EmployersPage";
 import StudentReport from "./pages/admin/StudentReport";
 import EmployerReport from "./pages/admin/EmployerReport";
 import FullReport from "./pages/admin/FullReport";
@@ -43,8 +41,6 @@ function App() {
         <Route path="/student-dashboard/job/:id" element={<div>Job Details Page</div>} />  
         <Route path="/student-applications" element={<div>Student Applications Page</div>} /> 
         <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/admin/users" element={<UsersPage />} />
-        <Route path="/admin/employers" element={<EmployersPage />} />
         <Route path="/admin/student-report" element={<StudentReport />} />
         <Route path="/admin/employer-report" element={<EmployerReport />} />
         <Route path="/admin/full-report" element={<FullReport />} />
