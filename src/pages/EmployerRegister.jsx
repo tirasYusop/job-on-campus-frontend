@@ -34,15 +34,20 @@ function EmployerRegister() {
     if (!form.phone_number.trim()) return alert("Phone number is required");
 
     try {
-      await api.post("api/employer-register/",data, { withCredentials: true } , {
-
-        username: form.username.trim(),
-        email: form.email.trim(),
-        password: form.password,
-        full_name: form.full_name.trim(),
-        company_name: form.company_name.trim(),
-        phone_number: form.phone_number.trim()
-      });
+      await api.post(
+        "/api/employer-register/",
+        {
+          username: form.username.trim(),
+          email: form.email.trim(),
+          password: form.password,
+          full_name: form.full_name.trim(),
+          company_name: form.company_name.trim(),
+          phone_number: form.phone_number.trim()
+        },
+        {
+          withCredentials: true
+        }
+      );
 
       alert("Employer registered & logged in!");
       navigate("/employer-dashboard");
