@@ -53,12 +53,20 @@ html, body {
 
   /* smaller logo */
   .logo img {
-    height: 28px;
+    height: 10px;
   }
 
   /* smaller title */
   .nav-title {
     font-size: 13px;
+  }
+  .dashboard-body {
+    flex-direction: column;
+  }
+
+  .dashboard-content {
+    width: 100%;
+    padding: 15px;
   }
 
   .menu-btn {
@@ -101,7 +109,6 @@ html, body {
   padding: 20px;
 }
 
-/* ✅ FIX: missing job list wrapper */
 .container-joblist {
   display: flex;
   flex-direction: column;
@@ -109,9 +116,6 @@ html, body {
   margin-top: 10px;
 }
 
-/* =========================
-   SEARCH BAR
-========================= */
 .search-bar {
   padding: 20px;
   display: flex;
@@ -147,25 +151,7 @@ html, body {
   opacity: 0.6;
 }
 
-/* =========================
-   JOB CARD (IMPORTANT)
-========================= */
-.jobList-card {
-  background: #fff;
-  border-radius: 14px;
-  padding: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-  cursor: pointer;
-  transition: 0.2s;
-}
 
-.jobList-card:hover {
-  transform: translateY(-3px);
-}
-
-/* =========================
-   MODAL
-========================= */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -218,30 +204,6 @@ html, body {
 
 .confirm-btn.danger {
   background: #c0392b;
-}
-
-/* =========================
-   MOBILE
-========================= */
-@media (max-width: 768px) {
-
-  .dashboard-body {
-    flex-direction: column;
-  }
-
-  .dashboard-content {
-    width: 100%;
-    padding: 15px;
-  }
-
-  .menu-btn {
-    display: block;
-    background: transparent;
-    border: none;
-    font-size: 22px;
-    color: white;
-    cursor: pointer;
-  }
 }
 
 .menu-btn {
