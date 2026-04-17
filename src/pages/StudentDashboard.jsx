@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../css/StudentDashboard.css";
 import logo from "../images/LOGOMPP.png";
 import api from "../api";
+import TermsAndConditions from "../component/TermsAndConditions";
 
 export default function StudentDashboard() {
   const [openSection, setOpenSection] = useState(null);
@@ -245,10 +246,6 @@ export default function StudentDashboard() {
                     <p>SALARY : {job.salary_estimate}</p>
                     <p> WORKER : {job.num_workers}</p>
                     <p> CRITERIA : {job.criteria}</p>
-                    
-
-       
-
 
                     <button
                       className={`apply-btn ${isApplied ? "disabled" : ""}`}
@@ -349,6 +346,11 @@ export default function StudentDashboard() {
               ))
             ))
           }
+
+          <div onClick={() => toggleSection("terms")} className="title">
+            📜 Terms & Conditions
+          </div>
+
 
         </div>
       </div>
