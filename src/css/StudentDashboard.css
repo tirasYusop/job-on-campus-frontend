@@ -245,7 +245,9 @@ html, body {
     padding: 15px;
   }
 
-  /* SIDEBAR MOBILE (HIDDEN BY DEFAULT) */
+  /* =========================
+     FIXED SIDEBAR (IMPORTANT FIX)
+  ========================= */
   .notification-wrapper {
     position: fixed;
     top: 0;
@@ -253,16 +255,24 @@ html, body {
     height: 100vh;
     width: 80%;
     background: white;
+
+    /* IMPORTANT FIX */
     transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+
     transition: transform 0.3s ease;
     z-index: 2000;
+
+    /* ensure it behaves correctly */
+    overflow-y: auto;
   }
 
   .notification-wrapper.open {
     transform: translateX(0);
+    -webkit-transform: translateX(0);
   }
 
-  /* OVERLAY */
+  /* OVERLAY (must cover everything) */
   .sidebar-overlay {
     position: fixed;
     inset: 0;
