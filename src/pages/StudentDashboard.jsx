@@ -199,6 +199,21 @@ export default function StudentDashboard() {
         </div>
       </div>
       <div className="dashboard-body">
+        <div className={`notification-wrapper ${showSidebar ? "open" : ""}`}>
+          <NotificationPanel
+            openSection={openSection}
+            toggleSection={toggleSection}
+            accepted={accepted}
+            rejected={rejected}
+            pending={pending}
+            pastJobs={pastJobs}
+            jobs={jobs}
+            setSelectedJob={setSelectedJob}
+            setConfirmCancel={setConfirmCancel}
+            setFeedbackAppId={setFeedbackAppId}
+            setShowTnc={setShowTnc}
+          />
+        </div>
         <div className="dashboard-content">
           <div className="search-bar">
             <input
@@ -226,21 +241,6 @@ export default function StudentDashboard() {
               );
             })}
          </div>
-        </div>
-        <div className={`notification-wrapper ${showSidebar ? "open" : ""}`}  onClick={(e) => e.stopPropagation()}>
-          <NotificationPanel
-            openSection={openSection}
-            toggleSection={toggleSection}
-            accepted={accepted}
-            rejected={rejected}
-            pending={pending}
-            pastJobs={pastJobs}
-            jobs={jobs}
-            setSelectedJob={setSelectedJob}
-            setConfirmCancel={setConfirmCancel}
-            setFeedbackAppId={setFeedbackAppId}
-            setShowTnc={setShowTnc}
-          />
         </div>
       </div>
 
