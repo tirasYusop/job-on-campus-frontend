@@ -39,8 +39,7 @@ function EmployersPage() {
   const fetchEmployerJobs = async (employerId) => {
     try {
       // 1. get ALL jobs from backend (existing API)
-      const res = await api.get("/admin/jobs/"); // or your get_all_jobs endpoint
-
+      const res = await api.get("/jobs/");
       // 2. filter jobs belonging to employer
       const filteredJobs = res.data.filter(
         job => job.employer_id === employerId || job.user_id === employerId
