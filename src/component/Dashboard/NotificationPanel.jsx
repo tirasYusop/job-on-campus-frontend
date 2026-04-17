@@ -1,5 +1,5 @@
 import React from "react";
-import "../CSS/NotificationPanel.css";
+import "../css/NotificationPanel.css";
 
 export default function NotificationPanel({
   openSection,
