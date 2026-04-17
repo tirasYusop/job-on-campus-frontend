@@ -1,4 +1,15 @@
-/* PANEL CONTAINER */
+/* =========================
+   WRAPPER (LAYOUT ONLY)
+========================= */
+.notification-wrapper {
+  width: 20%;
+  min-width: 260px;
+  background: #356f73;
+}
+
+/* =========================
+   PANEL (UI INSIDE)
+========================= */
 .notification-panel {
   width: 100%;
   height: 100%;
@@ -22,6 +33,8 @@
   border-radius: 8px;
   cursor: pointer;
   transition: 0.2s;
+  display: flex;
+  justify-content: space-between;
 }
 
 .notification-panel .title:hover {
@@ -34,19 +47,20 @@
   padding: 6px 10px;
   margin: 4px 0;
   font-size: 13px;
+  color: white;
 }
 
-/* COLORS */
+/* STATUS COLORS */
 .notification-panel .accepted {
-  color: green;
+  color: #2ecc71;
 }
 
 .notification-panel .rejected {
-  color: red;
+  color: #e74c3c;
 }
 
 .notification-panel .pending {
-  color: orange;
+  color: #f1c40f;
 }
 
 /* PENDING ITEM */
@@ -56,15 +70,19 @@
   align-items: center;
 }
 
-/* MOBILE SIDEBAR WRAPPER */
-.notification-wrapper {
-  width: 20%;
-  min-width: 250px;
-  background: #356f73;
+/* CANCEL BUTTON */
+.cancel-mini-btn {
+  font-size: 12px;
+  background: red;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 /* =========================
-   MOBILE MODE (IMPORTANT)
+   MOBILE SIDEBAR
 ========================= */
 @media (max-width: 768px) {
 
@@ -73,9 +91,10 @@
     top: 0;
     left: -100%;
     width: 75%;
-    height: 100%;
+    height: 100vh;
+    background: #356f73;
     z-index: 2000;
-    transition: 0.3s ease;
+    transition: left 0.3s ease;
   }
 
   .notification-wrapper.open {
@@ -91,5 +110,12 @@
     height: 100%;
     background: rgba(0,0,0,0.5);
     z-index: 1500;
+  }
+}
+
+/* hide overlay on desktop */
+@media (min-width: 769px) {
+  .sidebar-overlay {
+    display: none;
   }
 }

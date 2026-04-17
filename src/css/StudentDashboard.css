@@ -16,7 +16,7 @@ html, body {
   width: 100%;
   background-color: #356f73;
   color: white;
-  padding: 15px 30px;
+  padding: 15px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -32,13 +32,26 @@ html, body {
   margin: 0;
   font-size: 18px;
   font-weight: 600;
+  text-align: center;
 }
 
+/* logo */
 .logo img {
   height: 40px;
   width: auto;
   object-fit: contain;
   cursor: pointer;
+}
+
+/* menu button (mobile) */
+.menu-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  margin-right: 10px;
 }
 
 /* =========================
@@ -53,6 +66,7 @@ html, body {
 .dashboard-body {
   display: flex;
   flex: 1;
+  overflow: hidden;
 }
 
 /* =========================
@@ -66,11 +80,12 @@ html, body {
 }
 
 /* =========================
-   SIDEBAR WRAPPER (NEW)
+   SIDEBAR WRAPPER
 ========================= */
 .notification-wrapper {
   width: 20%;
-  min-width: 250px;
+  min-width: 260px;
+  background: #356f73;
 }
 
 /* =========================
@@ -102,10 +117,11 @@ html, body {
   box-shadow: 0 6px 18px rgba(44,62,80,0.15);
 }
 
+/* FIXED SEARCH ICON */
 .search-bar::before {
   content: "🔍";
   position: absolute;
-  left: calc(50% - 330px);
+  left: 35px;
   top: 50%;
   transform: translateY(-50%);
   font-size: 14px;
@@ -134,9 +150,9 @@ html, body {
 .jobList-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-  border-color: #e6e6e6;
 }
 
+/* header */
 .job-header {
   display: flex;
   justify-content: space-between;
@@ -165,9 +181,11 @@ html, body {
 .job-time {
   font-size: 11px;
   color: #888;
-  white-space: nowrap;
 }
 
+/* =========================
+   BUTTON
+========================= */
 .apply-btn {
   margin-top: 10px;
   width: 100%;
@@ -185,16 +203,11 @@ html, body {
 ========================= */
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.55);
-
+  inset: 0;
+  background: rgba(0,0,0,0.55);
   display: flex;
   justify-content: center;
   align-items: center;
-
   z-index: 9999;
 }
 
@@ -202,25 +215,15 @@ html, body {
   background: #fff;
   padding: 25px;
   border-radius: 12px;
-
   width: 90%;
   max-width: 420px;
   text-align: center;
-
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-
   animation: modalPop 0.18s ease-in-out;
 }
 
 @keyframes modalPop {
-  from {
-    transform: scale(0.85);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
 .modal-actions {
@@ -253,7 +256,7 @@ html, body {
 }
 
 /* =========================
-   MOBILE
+   MOBILE FIX (IMPORTANT)
 ========================= */
 @media (max-width: 768px) {
 
@@ -266,7 +269,7 @@ html, body {
     padding: 15px;
   }
 
-  /* SIDEBAR SLIDE */
+  /* hide desktop sidebar */
   .notification-wrapper {
     position: fixed;
     top: 0;
@@ -281,30 +284,25 @@ html, body {
     left: 0;
   }
 
-  /* OVERLAY */
+  /* overlay */
   .sidebar-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background: rgba(0,0,0,0.5);
     z-index: 1500;
   }
 
-  /* MENU BUTTON */
+  /* show menu button */
   .menu-btn {
     display: block;
-    background: transparent;
-    border: none;
-    font-size: 22px;
-    color: white;
-    margin-right: 10px;
-    cursor: pointer;
+  }
+
+  .nav-title {
+    font-size: 14px;
   }
 }
 
-/* HIDE MENU BUTTON ON DESKTOP */
+/* hide menu button on desktop */
 .menu-btn {
   display: none;
 }

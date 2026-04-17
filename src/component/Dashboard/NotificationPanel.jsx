@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/NotificationPanel.css";
+import "../CSS/NotificationPanel.css";
 
 export default function NotificationPanel({
   openSection,
@@ -12,18 +12,15 @@ export default function NotificationPanel({
   setSelectedJob,
   setConfirmCancel,
   setFeedbackAppId,
-  setShowTnc
+  setShowTnc,
+  setShowSidebar
 }) {
   return (
     <div className="notification-panel">
 
       <h3>DASHBOARD</h3>
 
-      {/* ACCEPTED */}
-      <div
-        onClick={() => toggleSection("accepted")}
-        className="title accepted"
-      >
+      <div onClick={() => toggleSection("accepted")} className="title accepted">
         🟢 Accepted
       </div>
 
@@ -31,10 +28,10 @@ export default function NotificationPanel({
         accepted.map(a => (
           <p
             key={a.id}
-            style={{ cursor: "pointer" }}
             onClick={() => {
               const job = jobs.find(j => j.id === a.job_id);
               if (job) setSelectedJob(job);
+              setShowSidebar(false);
             }}
           >
             {a.job_type}
@@ -42,11 +39,7 @@ export default function NotificationPanel({
         ))
       }
 
-      {/* REJECTED */}
-      <div
-        onClick={() => toggleSection("rejected")}
-        className="title rejected"
-      >
+      <div onClick={() => toggleSection("rejected")} className="title rejected">
         🔴 Rejected
       </div>
 
@@ -56,11 +49,7 @@ export default function NotificationPanel({
         ))
       }
 
-      {/* PENDING */}
-      <div
-        onClick={() => toggleSection("pending")}
-        className="title pending"
-      >
+      <div onClick={() => toggleSection("pending")} className="title pending">
         🟡 Pending
       </div>
 
@@ -68,10 +57,12 @@ export default function NotificationPanel({
         pending.map(a => (
           <div key={a.id} className="pending-item">
             <span>{a.job_type}</span>
-
             <button
               className="cancel-mini-btn"
-              onClick={() => setConfirmCancel(a.job_id)}
+              onClick={() => {
+                setConfirmCancel(a.job_id);
+                setShowSidebar(false);
+              }}
             >
               Cancel
             </button>
@@ -79,11 +70,7 @@ export default function NotificationPanel({
         ))
       }
 
-      {/* PAST JOBS */}
-      <div
-        onClick={() => toggleSection("past")}
-        className="title"
-      >
+      <div onClick={() => toggleSection("past")} className="title">
         📌 Past Jobs
       </div>
 
@@ -92,20 +79,13 @@ export default function NotificationPanel({
           <p>No past jobs</p>
         ) : (
           pastJobs.map(a => (
-            <div key={a.id} style={{ marginBottom: "8px" }}>
+            <div key={a.id}>
               <span>✔ {a.job_type}</span>
-
               <button
-                style={{
-                  marginLeft: "10px",
-                  background: "green",
-                  color: "white",
-                  border: "none",
-                  padding: "4px 8px",
-                  borderRadius: "5px",
-                  cursor: "pointer"
+                onClick={() => {
+                  setFeedbackAppId(a.id);
+                  setShowSidebar(false);
                 }}
-                onClick={() => setFeedbackAppId(a.id)}
               >
                 Give Feedback
               </button>
@@ -114,9 +94,11 @@ export default function NotificationPanel({
         ))
       }
 
-      {/* TERMS */}
       <div
-        onClick={() => setShowTnc(true)}
+        onClick={() => {
+          setShowTnc(true);
+          setShowSidebar(false);
+        }}
         className="title"
       >
         📜 Terms & Conditions
