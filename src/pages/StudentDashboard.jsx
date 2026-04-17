@@ -121,6 +121,18 @@ export default function StudentDashboard() {
     }
   };
 
+  useEffect(() => {
+  const handlePopState = () => {
+    window.location.reload();
+  };
+
+  window.addEventListener("popstate", handlePopState);
+
+  return () => {
+    window.removeEventListener("popstate", handlePopState);
+  };
+}, []);
+
   // =========================
   // LOGOUT
   // =========================

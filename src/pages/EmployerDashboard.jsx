@@ -38,6 +38,18 @@ export default function EmployerDashboard() {
   };
 
   useEffect(() => {
+  const handlePopState = () => {
+    window.location.reload();
+  };
+
+  window.addEventListener("popstate", handlePopState);
+
+  return () => {
+    window.removeEventListener("popstate", handlePopState);
+  };
+}, []);
+
+  useEffect(() => {
     fetchVerificationStatus();
     fetchJobs();
 
