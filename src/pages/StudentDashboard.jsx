@@ -346,10 +346,15 @@ export default function StudentDashboard() {
               ))
             ))
           }
+            <div onClick={() => toggleSection("terms")} className="title">
+              📜 Terms & Conditions
+            </div>
 
-          <div onClick={() => toggleSection("terms")} className="title">
-            📜 Terms & Conditions
-          </div>
+            {openSection === "terms" && (
+              <div className="terms-box">
+                <TermsAndConditions />
+              </div>
+            )}
 
 
         </div>
