@@ -1,75 +1,51 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-/* =========================
-   PAGES (COMMENTED OUT)
-   ========================= */
+import Login from "./pages/Login";
+import RegisterChoice from "./pages/RegisterChoice";
 
-// import Login from "./pages/Login";
-// import RegisterChoice from "./pages/RegisterChoice";
+import StudentRegister from "./pages/StudentRegister";
+import EmployerRegister from "./pages/EmployerRegister";
 
-// import StudentRegister from "./pages/StudentRegister";
-// import EmployerRegister from "./pages/EmployerRegister";
+import StudentDashboard from "./pages/StudentDashboard";
+import EmployerDashboard from "./pages/EmployerDashboard";
 
-// import StudentDashboard from "./pages/StudentDashboard";
-// import EmployerDashboard from "./pages/EmployerDashboard";
-
-// import AdminDashboard from "./pages/admin/AdminDashboard";
-// import JobPost from "./pages/JobPost";
-// import StudentReport from "./pages/admin/StudentReport";
-// import EmployerReport from "./pages/admin/EmployerReport";
-// import FullReport from "./pages/admin/FullReport";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import JobPost from "./pages/JobPost";
+import StudentReport from "./pages/admin/StudentReport";
+import EmployerReport from "./pages/admin/EmployerReport";
+import FullReport from "./pages/admin/FullReport";
 
 
-/* =========================
-   MAINTENANCE PAGE
-   ========================= */
-function Maintenance() {
-  return (
-    <div style={{ textAlign: "center", marginTop: "100px" }}>
-      <h1>🚧 Under Maintenance</h1>
-      <p>The system is temporarily offline. Please come back later.</p>
-    </div>
-  );
-}
 
 
-/* =========================
-   APP
-   ========================= */
 function App() {
   return (
     <Router>
       <Routes>
-
-        {/* ALL ROUTES DISABLED */}
-        <Route path="*" element={<Maintenance />} />
-
-        {/* OLD ROUTES (COMMENTED OUT)
-
+        {/* AUTH */}
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<RegisterChoice />} />
 
+        {/* REGISTER */}
         <Route path="/register/student" element={<StudentRegister />} />
         <Route path="/register/employer" element={<EmployerRegister />} />
 
+        {/* DASHBOARD */}
         <Route path="/student-dashboard" element={<StudentDashboard />} />
         <Route path="/employer-dashboard" element={<EmployerDashboard />} />
 
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/employer/job-form" element={<JobPost />} />
         <Route path="/post-job" element={<JobPost />} />
-
-        <Route path="/student-dashboard/job/:id" element={<div>Job Details Page</div>} />
-        <Route path="/student-applications" element={<div>Student Applications Page</div>} />
-
+        <Route path="/student-dashboard/job/:id" element={<div>Job Details Page</div>} />  
+        <Route path="/student-applications" element={<div>Student Applications Page</div>} /> 
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/admin/student-report" element={<StudentReport />} />
         <Route path="/admin/employer-report" element={<EmployerReport />} />
         <Route path="/admin/full-report" element={<FullReport />} />
 
-        */}
-
+        
       </Routes>
     </Router>
   );
