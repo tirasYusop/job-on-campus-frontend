@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import "../../css/AdminPages.css";
 import api from "../../api";
+import JobCard from "../../component/admin/JobCard";
 
 function EmployersPage() {
   const [employers, setEmployers] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [status, setStatus] = useState("ALL");
+  const [employerJobs, setEmployerJobs] = useState([]);
+const [showJobsModal, setShowJobsModal] = useState(false);
 
   const [selectedEmployer, setSelectedEmployer] = useState(null);
 
@@ -33,6 +36,15 @@ function EmployersPage() {
     }
   }, [status, employers]);
 
+  const fetchEmployerJobs = async (employerId) => {
+  try {
+    const res = await api.get(`/admin/employers/${employerId}/jobs/`);
+    setEmployerJobs(res.data);
+    setShowJobsModal(true);
+  } catch (err) {
+    console.error(err);
+  }
+};
   return (
     <div className="admin-page">
 
@@ -58,6 +70,7 @@ function EmployersPage() {
               <th>Username</th>
               <th>Phone</th>
               <th>Status</th>
+              <th>Total Jobs</th>
             </tr>
           </thead>
 
@@ -77,6 +90,19 @@ function EmployersPage() {
                   ) : (
                     <span className="status unverified">❌ Unverified</span>
                   )}
+                </td>
+                <td
+                  style={{
+                    color: "#3498db",
+                    fontWeight: "bold",
+                    cursor: "pointer"
+                  }}
+                  onClick={(ev) => {
+                    ev.stopPropagation(); // IMPORTANT
+                    fetchEmployerJobs(e.id);
+                  }}
+                >
+                  {e.total_jobs || 0}
                 </td>
               </tr>
             ))}
@@ -109,6 +135,35 @@ function EmployersPage() {
           </div>
         </div>
       )}
+
+      {showJobsModal && (
+        <div className="modal-overlay" onClick={() => setShowJobsModal(false)}>
+          <div className="modal-box large" onClick={(e) => e.stopPropagation()}>
+
+            <h2>📦 Employer Jobs</h2>
+
+            {employerJobs.length === 0 ? (
+              <p>No jobs posted</p>
+            ) : (
+              <div className="job-card-container">
+                {employerJobs.map(job => (
+                  <JobCard key={job.id} job={job} />
+                ))}
+              </div>
+            )}
+
+            <button
+              className="close-btn"
+              onClick={() => setShowJobsModal(false)}
+            >
+              Close
+            </button>
+
+          </div>
+        </div>
+)}
+
+      
 
     </div>
   );
