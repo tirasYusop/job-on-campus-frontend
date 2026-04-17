@@ -4,10 +4,12 @@ import "../css/StudentDashboard.css";
 import logo from "../images/LOGOMPP.png";
 import api from "../api";
 import TermsAndConditions from "../component/TermsAndConditions";
+import NotificationPanel from "../components/dashboard/NotificationPanel";
 
 export default function StudentDashboard() {
   const [openSection, setOpenSection] = useState(null);
   const navigate = useNavigate();
+  const [showSidebar, setShowSidebar] = useState(false);
 
   const [jobs, setJobs] = useState([]);
   const [applications, setApplications] = useState([]);
@@ -190,6 +192,12 @@ export default function StudentDashboard() {
     <div className="dashboard-layout">
       <div className="navbar">
         <div className="nav-left">
+            <button
+              className="menu-btn"
+              onClick={() => setShowSidebar(true)}
+            >
+              ☰
+            </button>
           <div className="logo">
             <img src={logo} alt="Logo" />
           </div>
@@ -264,95 +272,29 @@ export default function StudentDashboard() {
               })}
           </div>
         </div>
-        <div className="dashboard-notification">
-
-          <h3>DASHBOARD</h3>
-
-          {/* ACCEPTED */}
-          <div onClick={() => toggleSection("accepted")} className="title accepted">
-            🟢 Accepted
-          </div>
-
-          {openSection === "accepted" &&
-            accepted.map(a => (
-              <p
-                key={a.id}
-                style={{ cursor: "pointer" }}
-               onClick={() => {
-                  const job = jobs.find(j => j.id === a.job_id);
-                  if (job) setSelectedJob(job);
-                }}
-              >
-                {a.job_type}
-              </p>
-            ))
-          }
-
-          <div onClick={() => toggleSection("rejected")} className="title rejected">
-            🔴 Rejected
-          </div>
-
-          {openSection === "rejected" &&
-            rejected.map(a => (
-              <p key={a.id}>🔴 {a.job_type}</p>
-            ))
-          }
-
-          <div onClick={() => toggleSection("pending")} className="title pending">
-            🟡 Pending
-          </div>
-
-          {openSection === "pending" &&
-            pending.map(a => (
-              <div key={a.id} className="pending-item">
-                <span>{a.job_type}</span>
-
-                <button
-                  className="cancel-mini-btn"
-                  onClick={() => setConfirmCancel(a.job_id)}
-                >
-                  Cancel
-                </button>
-              </div>
-            ))
-          }
-
-          <div onClick={() => toggleSection("past")} className="title">
-            📌 Past Jobs
-          </div>
-
-          {openSection === "past" &&
-            (pastJobs.length === 0 ? (
-              <p>No past jobs</p>
-            ) : (
-              pastJobs.map(a => (
-                <div key={a.id} style={{ marginBottom: "8px" }}>
-                  <span>✔ {a.job_type}</span>
-
-                  <button
-                    style={{
-                      marginLeft: "10px",
-                      background: "green",
-                      color: "white",
-                      border: "none",
-                      padding: "4px 8px",
-                      borderRadius: "5px",
-                      cursor: "pointer"
-                    }}
-                    onClick={() => setFeedbackAppId(a.id)}
-                  >
-                    Give Feedback
-                  </button>
-                </div>
-              ))
-            ))
-          }
-            <div onClick={() => setShowTnc(true)} className="title"
-              >📜 Terms & Conditions
-              </div>
+        <div className={`notification-wrapper ${showSidebar ? "open" : ""}`}>
+          <NotificationPanel
+            openSection={openSection}
+            toggleSection={toggleSection}
+            accepted={accepted}
+            rejected={rejected}
+            pending={pending}
+            pastJobs={pastJobs}
+            jobs={jobs}
+            setSelectedJob={setSelectedJob}
+            setConfirmCancel={setConfirmCancel}
+            setFeedbackAppId={setFeedbackAppId}
+            setShowTnc={setShowTnc}
+          />
         </div>
       </div>
 
+      {showSidebar && (
+        <div
+          className="sidebar-overlay"
+          onClick={() => setShowSidebar(false)}
+        />
+      )}
       {showTnc && (
         <TermsAndConditions onClose={() => setShowTnc(false)} />
       )}
