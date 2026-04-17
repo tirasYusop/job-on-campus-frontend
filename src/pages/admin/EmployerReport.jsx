@@ -6,20 +6,8 @@ function EmployersPage() {
   const [employers, setEmployers] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [status, setStatus] = useState("ALL");
-  const [employerJobs, setEmployerJobs] = useState([]);
-const [selectedEmployerJobs, setSelectedEmployerJobs] = useState(null);
 
   const [selectedEmployer, setSelectedEmployer] = useState(null);
-
-  const fetchEmployerJobs = async (employerId) => {
-  try {
-    const res = await api.get(`/admin/employers/${employerId}/jobs/`);
-    setSelectedEmployerJobs(employerId);
-    setEmployerJobs(res.data);
-  } catch (err) {
-    console.error(err);
-  }
-};
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,7 +58,6 @@ const [selectedEmployerJobs, setSelectedEmployerJobs] = useState(null);
               <th>Username</th>
               <th>Phone</th>
               <th>Status</th>
-              <th>Total Jobs</th>
             </tr>
           </thead>
 
@@ -90,15 +77,6 @@ const [selectedEmployerJobs, setSelectedEmployerJobs] = useState(null);
                   ) : (
                     <span className="status unverified">❌ Unverified</span>
                   )}
-                </td>
-                <td
-                  style={{ color: "#3498db", fontWeight: "bold", cursor: "pointer" }}
-                  onClick={(ev) => {
-                    ev.stopPropagation(); // IMPORTANT (prevents opening employer modal)
-                    fetchEmployerJobs(e.id);
-                  }}
-                >
-                  {e.total_jobs || 0}
                 </td>
               </tr>
             ))}
