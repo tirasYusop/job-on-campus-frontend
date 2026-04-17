@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import "../../css/AdminPages.css";
 import api from "../../api";
 
-import EmployerTable from "../../components/admin/EmployerTable";
-import EmployerDetailsModal from "../../components/admin/EmployerDetailsModal";
-import EmployerJobsModal from "../../components/admin/EmployerJobsModal";
+import EmployerTable from "../../component/admin/EmployerTable";
+import EmployerDetailsModal from "../../component/admin/EmployerDetailsModal";
+import EmployerJobsModal from "../../component/admin/EmployerJobsModal";
 
 function EmployersPage() {
   const [employers, setEmployers] = useState([]);
