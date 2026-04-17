@@ -4,7 +4,7 @@ import "../css/StudentDashboard.css";
 import logo from "../images/LOGOMPP.png";
 import api from "../api";
 import TermsAndConditions from "../component/TermsAndConditions";
-import NotificationPanel from "../component/dashboard/NotificationPanel";
+import NotificationPanel from "../component/Dashboard/NotificationPanel";
 
 export default function StudentDashboard() {
   const [openSection, setOpenSection] = useState(null);
