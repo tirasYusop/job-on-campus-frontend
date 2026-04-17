@@ -124,7 +124,7 @@ function FullReport() {
         <div className="stat-card"><h3>{data.total_jobs}</h3><p>Total Jobs</p></div>
         <div className="stat-card"><h3>{data.total_cancelled}</h3><p>Cancelled</p></div>
         <div className="stat-card"><h3>{data.cancel_rate}%</h3><p>Cancel Rate</p></div>
-        <div className="stat-card"><h3>{data.cancel_rate}%</h3><p>Cancel Rate</p></div>
+        <div className="stat-card"><h3>{data.cancel_rate}%</h3><p>Accepted Rate</p></div>
       </div>
 
       {/* CHARTS */}
