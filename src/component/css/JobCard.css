@@ -1,0 +1,81 @@
+/* =========================
+   JOB CARD
+========================= */
+
+.jobList-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  border: 1px solid #f0f0f0;
+
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.jobList-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  border-color: #e6e6e6;
+}
+
+/* HEADER */
+.job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* TITLE */
+.jobList-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  color: #2c3e50;
+}
+
+/* COMPANY */
+.jobList-card .company {
+  font-size: 13px;
+  color: #777;
+  margin-top: 2px;
+}
+
+/* DETAILS TEXT */
+.jobList-card p {
+  margin: 2px 0;
+  font-size: 13px;
+  color: #555;
+}
+
+/* TIME BADGE */
+.job-time {
+  font-size: 11px;
+  color: #888;
+  white-space: nowrap;
+}
+
+/* APPLY BUTTON */
+.apply-btn {
+  margin-top: 10px;
+  width: 100%;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+/* hover effect */
+.apply-btn:hover:not(.disabled) {
+  background: #43a047;
+  transform: scale(1.01);
+}
+
+/* disabled state */
+.apply-btn.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
