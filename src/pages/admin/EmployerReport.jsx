@@ -36,21 +36,19 @@ function EmployersPage() {
     }
   }, [status, employers]);
 
-  // ✅ USE EXISTING BACKEND
   const fetchEmployerJobs = async (employerId) => {
     try {
-      const res = await api.get("/admin/employer-report/");
-      
-      // find selected employer report
-      const report = res.data.find(r => r.employer_id === employerId);
+      // 1. get ALL jobs from backend (existing API)
+      const res = await api.get("/admin/jobs/"); // or your get_all_jobs endpoint
 
-      if (report) {
-        setEmployerJobs(report.jobs || []); // (we handle below)
-      } else {
-        setEmployerJobs([]);
-      }
+      // 2. filter jobs belonging to employer
+      const filteredJobs = res.data.filter(
+        job => job.employer_id === employerId || job.user_id === employerId
+      );
 
+      setEmployerJobs(filteredJobs);
       setShowJobsModal(true);
+
     } catch (err) {
       console.error(err);
     }
