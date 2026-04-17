@@ -245,9 +245,13 @@ export default function StudentDashboard() {
         </div>
       </div>
 
-{/* {showSidebar && (
-  <div className="sidebar-overlay" />
-)} */}
+      {showSidebar && (
+        <div
+          className="sidebar-overlay"
+          onClick={() => setShowSidebar(false)}
+          style={{ touchAction: "none" }}
+        />
+      )}
       {showTnc && (
         <TermsAndConditions onClose={() => setShowTnc(false)} />
       )}
