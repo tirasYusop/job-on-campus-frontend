@@ -35,7 +35,7 @@ export default function StudentDashboard() {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const res = await api.get("/api/jobs/");
+        const res = await api.get("/jobs/");
         setJobs(res.data);
       } catch (err) {
         console.error(err);
