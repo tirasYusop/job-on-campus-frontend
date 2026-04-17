@@ -10,7 +10,7 @@ html, body {
 }
 
 /* =========================
-   NAVBAR
+   NAVBAR (UPDATED FIX)
 ========================= */
 .navbar {
   width: 100%;
@@ -25,20 +25,55 @@ html, body {
   z-index: 1000;
 }
 
+/* FIXED CENTER TITLE (better than absolute) */
 .nav-title {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  flex: 1;
+  text-align: center;
   margin: 0;
   font-size: 18px;
   font-weight: 600;
 }
 
+/* LOGO */
 .logo img {
   height: 40px;
   width: auto;
   object-fit: contain;
   cursor: pointer;
+}
+
+/* =========================
+   MOBILE FIX
+========================= */
+@media (max-width: 768px) {
+
+  .navbar {
+    padding: 10px 15px;
+  }
+
+  /* smaller logo */
+  .logo img {
+    height: 28px;
+  }
+
+  /* smaller title */
+  .nav-title {
+    font-size: 13px;
+  }
+
+  .menu-btn {
+    display: block;
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    color: white;
+    cursor: pointer;
+  }
+}
+
+/* hide menu button on desktop */
+.menu-btn {
+  display: none;
 }
 
 /* =========================
@@ -66,56 +101,13 @@ html, body {
   padding: 20px;
 }
 
-/* =========================
-   SIDEBAR
-========================= */
-.dashboard-notification {
-  width: 20%;
-  flex: none;
-  background: #356f73;
-  border-left: 1px solid #ddd;
-  padding: 15px;
-  height: calc(100vh - 60px);
-  position: sticky;
-  top: 60px;
-  overflow-y: auto;
-  box-shadow: -2px 0 10px rgba(0,0,0,0.05);
-}
-
-/* sidebar title */
-.dashboard-notification h3 {
-  color: #fff;
-}
-
-.dashboard-notification .title {
-  font-weight: bold;
-  padding: 12px;
-  margin-top: 10px;
-  background: #f4f6f8;
-  border-radius: 8px;
-  cursor: pointer;
+/* ✅ FIX: missing job list wrapper */
+.container-joblist {
   display: flex;
-  justify-content: space-between;
-  transition: 0.2s;
-  color: #010101;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
 }
-
-.dashboard-notification .title:hover {
-  background: #e8ecf1;
-}
-
-/* items */
-.dashboard-notification p,
-.dashboard-notification .pending-item {
-  padding: 6px 10px;
-  margin: 4px 0;
-  font-size: 13px;
-}
-
-/* status colors */
-.accepted { color: green; }
-.rejected { color: red; }
-.pending { color: orange; }
 
 /* =========================
    SEARCH BAR
@@ -144,10 +136,11 @@ html, body {
   box-shadow: 0 6px 18px rgba(44,62,80,0.15);
 }
 
+/* FIX: center icon properly (your version was fragile) */
 .search-bar::before {
   content: "🔍";
   position: absolute;
-  left: calc(50% - 330px);
+  left: 35px;
   top: 50%;
   transform: translateY(-50%);
   font-size: 14px;
@@ -155,59 +148,19 @@ html, body {
 }
 
 /* =========================
-   JOB CARD
+   JOB CARD (IMPORTANT)
 ========================= */
 .jobList-card {
   background: #fff;
   border-radius: 14px;
   padding: 16px;
-  margin-bottom: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-
   box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-  border: 1px solid #f0f0f0;
-  transition: 0.2s;
   cursor: pointer;
+  transition: 0.2s;
 }
 
 .jobList-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-}
-
-.job-header {
-  display: flex;
-  justify-content: space-between;
-}
-
-.jobList-card h3 {
-  font-size: 16px;
-  font-weight: 600;
-  margin: 0;
-  color: #2c3e50;
-}
-
-.jobList-card .company {
-  font-size: 13px;
-  color: #777;
-}
-
-.jobList-card p {
-  margin: 2px 0;
-  font-size: 13px;
-  color: #555;
-}
-
-.job-time {
-  font-size: 11px;
-  color: #888;
-}
-
-.apply-btn {
-  margin-top: 10px;
-  width: 100%;
 }
 
 /* =========================
@@ -279,10 +232,6 @@ html, body {
   .dashboard-content {
     width: 100%;
     padding: 15px;
-  }
-
-  .dashboard-notification {
-    display: none;
   }
 
   .menu-btn {
