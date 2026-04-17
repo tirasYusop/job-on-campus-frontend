@@ -60,9 +60,6 @@ html, body {
   .nav-title {
     font-size: 13px;
   }
-  .dashboard-body {
-    flex-direction: column;
-  }
 
   .dashboard-content {
     width: 100%;
