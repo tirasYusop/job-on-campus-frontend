@@ -178,7 +178,11 @@ export default function StudentDashboard() {
   const rejected = applications.filter(a => a.status === "rejected");
   const pending = applications.filter(a => a.status === "pending");
 
-  const appliedJobsSet = new Set(applications.map(a => Number(a.job_id)));
+  const appliedJobsSet = new Set(
+    applications
+      .filter(a => a.status !== "cancelled")
+      .map(a => Number(a.job_id))
+  );
 
   return (
     <div className="dashboard-layout">
