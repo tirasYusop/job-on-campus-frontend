@@ -1,10 +1,11 @@
 import React from "react";
 import "./css/TermsAndConditions.css";
 
-export default function TermsAndConditions() {
+export default function TermsAndConditions({ onClose }) {
   return (
-    <div className="tnc-container">
-      <div className="tnc-card">
+    <div className="tnc-overlay" onClick={onClose}>
+      <div className="tnc-card" onClick={(e) => e.stopPropagation()}>
+
         <h2>Terma & Syarat Penggunaan</h2>
 
         <p>
@@ -42,6 +43,11 @@ export default function TermsAndConditions() {
             berpakaian universiti dan menjaga disiplin sepanjang tempoh bekerja.
           </li>
         </ol>
+
+        <button className="tnc-close-btn" onClick={onClose}>
+          Close
+        </button>
+
       </div>
     </div>
   );

@@ -18,6 +18,8 @@ export default function StudentDashboard() {
   const [feedbackAppId, setFeedbackAppId] = useState(null);
   const [feedbackText, setFeedbackText] = useState("");
   const [pastJobs, setPastJobs] = useState([]);
+  const [showTerms, setShowTerms] = useState(false);
+  const [showTnc, setShowTnc] = useState(false);
 
   const toggleSection = (section) => {
   setOpenSection(openSection === section ? null : section);
@@ -346,19 +348,15 @@ export default function StudentDashboard() {
               ))
             ))
           }
-            <div onClick={() => toggleSection("terms")} className="title">
-              📜 Terms & Conditions
-            </div>
-
-            {openSection === "terms" && (
-              <div className="terms-box">
-                <TermsAndConditions />
+            <div onClick={() => setShowTnc(true)} className="title"
+              >📜 Terms & Conditions
               </div>
-            )}
-
-
         </div>
       </div>
+
+      {showTnc && (
+        <TermsAndConditions onClose={() => setShowTnc(false)} />
+      )}
 
       {feedbackAppId && (
         <div className="modal-overlay" onClick={() => setFeedbackAppId(null)}>
