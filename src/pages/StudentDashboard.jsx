@@ -276,9 +276,8 @@ export default function StudentDashboard() {
               <p
                 key={a.id}
                 style={{ cursor: "pointer" }}
-                onClick={async () => {
-                  const res = await api.get("/api/jobs/");
-                  const job = res.data.find(j => j.id === a.job_id);
+               onClick={() => {
+                  const job = jobs.find(j => j.id === a.job_id);
                   if (job) setSelectedJob(job);
                 }}
               >
@@ -447,8 +446,16 @@ export default function StudentDashboard() {
             <p><b>Company:</b> {selectedJob.business_type}</p>
             <p><b>Location:</b> {selectedJob.location}</p>
             <p><b>Phone:</b> {selectedJob.phone}</p>
+
+            <p><b>Start Date:</b> {selectedJob.start_date}</p>
+            <p><b>End Date:</b> {selectedJob.end_date}</p>
+
+            <p><b>Work Time:</b> {selectedJob.work_time}</p>
             <p><b>Salary:</b> {selectedJob.salary_estimate}</p>
-            <p><b>Time:</b> {selectedJob.work_time}</p>
+            <p><b>Workers:</b> {selectedJob.num_workers}</p>
+
+            <p><b>Criteria:</b> {selectedJob.criteria}</p>
+
 
             <button
               className="close-btn"

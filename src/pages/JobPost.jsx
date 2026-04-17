@@ -24,8 +24,6 @@ export default function JobPost() {
   const isEdit = !!editJob;
 
   const [formData, setFormData] = useState(emptyForm);
-
-  // ✅ FIXED useEffect (no ESLINT warning)
   useEffect(() => {
     if (isEdit) {
       setFormData({
@@ -49,14 +47,13 @@ export default function JobPost() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // ================= SUBMIT =================
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       if (isEdit) {
         await api.put(
-          `/api/employer/job/update-job/${editJob.id}/`,
+          `/employer/job/update-job/${editJob.id}/`,
           formData,
           { withCredentials: true }
         );
@@ -64,7 +61,7 @@ export default function JobPost() {
         alert("Job updated successfully!");
       } else {
         await api.post(
-          "/api/employer/post-job/",
+          "/employer/post-job/",
           formData,
           { withCredentials: true }
         );
