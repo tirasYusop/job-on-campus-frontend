@@ -179,12 +179,12 @@ export default function StudentDashboard() {
     <div className="dashboard-layout">
       <div className="navbar">
         <div className="nav-left">
-            <button
-              className="menu-btn"
-              onClick={() => setShowSidebar(true)}
-            >
-              ☰
-            </button>
+          <button
+            className="menu-btn"
+            onClick={() => setShowSidebar(prev => !prev)}
+          >
+            ☰
+          </button>
           <div className="logo">
             <img src={logo} alt="Logo" />
           </div>
