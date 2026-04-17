@@ -227,7 +227,7 @@ export default function StudentDashboard() {
             })}
          </div>
         </div>
-        <div className={`notification-wrapper ${showSidebar ? "open" : ""}`}>
+        <div className={`notification-wrapper ${showSidebar ? "open" : ""}`}  onClick={(e) => e.stopPropagation()}>
           <NotificationPanel
             openSection={openSection}
             toggleSection={toggleSection}
