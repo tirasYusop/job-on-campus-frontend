@@ -18,7 +18,6 @@ export default function StudentDashboard() {
   const [feedbackAppId, setFeedbackAppId] = useState(null);
   const [feedbackText, setFeedbackText] = useState("");
   const [pastJobs, setPastJobs] = useState([]);
-  const [showTerms, setShowTerms] = useState(false);
   const [showTnc, setShowTnc] = useState(false);
 
   const toggleSection = (section) => {
