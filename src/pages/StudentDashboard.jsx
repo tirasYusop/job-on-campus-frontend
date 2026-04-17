@@ -212,6 +212,7 @@ export default function StudentDashboard() {
             setConfirmCancel={setConfirmCancel}
             setFeedbackAppId={setFeedbackAppId}
             setShowTnc={setShowTnc}
+            setShowSidebar={setShowSidebar}
           />
         </div>
         <div className="dashboard-content">
