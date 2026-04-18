@@ -229,9 +229,11 @@ body {
 @media (max-width: 768px) {
   .dashboard-body {
     flex-direction: column;
+    
   }
     .navbar {
     padding: 8px 12px; /* smaller height */
+    position:sticky;
   }
 
   .logo img {
@@ -260,4 +262,5 @@ body {
   .nav-title {
     font-size: 13px;
   }
+
 }
