@@ -27,7 +27,6 @@
 /* SCROLLABLE CONTENT */
 .np-content {
   flex: 1;
-  overflow-y: auto;
   padding-right: 5px;
 }
 
@@ -141,6 +140,11 @@
     background: rgba(0,0,0,0.5);
     z-index: 1500;
     column-wrap: auto;
+  }
+
+  .np-footer 
+  {
+    padding-bottom: 30px;
   }
 }
 
