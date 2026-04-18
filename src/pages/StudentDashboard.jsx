@@ -6,6 +6,7 @@ import api from "../api";
 import TermsAndConditions from "../component/TermsAndConditions";
 import NotificationPanel from "../component/Dashboard/NotificationPanel";
 import JobCard from "../component/Dashboard/JobCard";
+import StudentResponsibilityPopup from "../component/StudentResponsibilityPopup";
 
 export default function StudentDashboard() {
   const [openSection, setOpenSection] = useState(null);
@@ -24,10 +25,10 @@ export default function StudentDashboard() {
   const [showTnc, setShowTnc] = useState(false);
 
   const toggleSection = (section) => {
-  setOpenSection(openSection === section ? null : section);
-};
+    setOpenSection(openSection === section ? null : section);
+  };
 
-  const filteredJobs = jobs.filter(job => {
+  const filteredJobs = jobs.filter((job) => {
     const keyword = search.toLowerCase();
 
     return (
@@ -46,33 +47,31 @@ export default function StudentDashboard() {
         console.error(err);
       }
     };
+
     fetchJobs();
   }, []);
 
   useEffect(() => {
-  const now = new Date();
+    const now = new Date();
 
-  const past = applications.filter(a => {
-    if (a.status !== "confirmed") return false;
+    const past = applications.filter((a) => {
+      if (a.status !== "confirmed") return false;
 
-    // try find job end_date from jobs list
-    const job = jobs.find(j => j.id === a.job_id);
+      const job = jobs.find((j) => j.id === a.job_id);
+      if (!job || !job.end_date) return false;
 
-    if (!job || !job.end_date) return false;
+      return new Date(job.end_date) < now;
+    });
 
-    return new Date(job.end_date) < now;
-  });
-
-  setPastJobs(past);
-}, [applications, jobs]);
+    setPastJobs(past);
+  }, [applications, jobs]);
 
   useEffect(() => {
     const fetchApplications = async () => {
       try {
-        const res = await api.get(
-          "/student-applications/",
-          { withCredentials: true }
-        );
+        const res = await api.get("/student-applications/", {
+          withCredentials: true,
+        });
         setApplications(res.data);
       } catch (err) {
         console.error(err);
@@ -81,21 +80,17 @@ export default function StudentDashboard() {
 
     fetchApplications();
     const interval = setInterval(fetchApplications, 5000);
+
     return () => clearInterval(interval);
   }, []);
 
   const applyJob = async (jobId) => {
     try {
-      await api.post(
-        `/apply-job/${jobId}/`,
-        {},
-        { withCredentials: true }
-      );
+      await api.post(`/apply-job/${jobId}/`, {}, { withCredentials: true });
 
-      const res = await api.get(
-        "/student-applications/",
-        { withCredentials: true }
-      );
+      const res = await api.get("/student-applications/", {
+        withCredentials: true,
+      });
 
       setApplications(res.data);
     } catch (err) {
@@ -103,18 +98,14 @@ export default function StudentDashboard() {
     }
   };
 
-  // =========================
-  // CANCEL APPLICATION
-  // =========================
   const cancelApplication = async (jobId) => {
     try {
-      await api.delete(
-        `/cancel-application/${jobId}/`,
-        { withCredentials: true }
-      );
+      await api.delete(`/cancel-application/${jobId}/`, {
+        withCredentials: true,
+      });
 
-      setApplications(prev =>
-        prev.filter(app => Number(app.job_id) !== Number(jobId))
+      setApplications((prev) =>
+        prev.filter((app) => Number(app.job_id) !== Number(jobId))
       );
     } catch (err) {
       console.error(err);
@@ -122,32 +113,25 @@ export default function StudentDashboard() {
   };
 
   useEffect(() => {
-  const handlePopState = () => {
-    window.location.reload();
-  };
+    const handlePopState = () => {
+      window.location.reload();
+    };
 
-  window.addEventListener("popstate", handlePopState);
+    window.addEventListener("popstate", handlePopState);
 
-  return () => {
-    window.removeEventListener("popstate", handlePopState);
-  };
-}, []);
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, []);
 
-  // =========================
-  // LOGOUT
-  // =========================
   const handleLogout = async () => {
-      await api.post(
-      "/logout/",
-      {},
-      { withCredentials: true }
-    );
+    await api.post("/logout/", {}, { withCredentials: true });
 
     localStorage.clear();
     navigate("/");
   };
 
-    const submitFeedback = async () => {
+  const submitFeedback = async () => {
     if (!feedbackText.trim()) return;
 
     try {
@@ -162,72 +146,81 @@ export default function StudentDashboard() {
       setFeedbackAppId(null);
       setFeedbackText("");
 
-      // refresh
-      const res = await api.get(
-        "/student-applications/",
-        { withCredentials: true }
-      );
-      setApplications(res.data);
+      const res = await api.get("/student-applications/", {
+        withCredentials: true,
+      });
 
+      setApplications(res.data);
     } catch (err) {
       console.error(err);
     }
   };
 
-  // =========================
-  // FILTERS
-  // =========================
-  const accepted = applications.filter(a => a.status === "confirmed");
-  const rejected = applications.filter(a => a.status === "rejected");
-  const pending = applications.filter(a => a.status === "pending");
+  const accepted = applications.filter((a) => a.status === "confirmed");
+  const rejected = applications.filter((a) => a.status === "rejected");
+  const pending = applications.filter((a) => a.status === "pending");
 
   const appliedJobsSet = new Set(
     applications
-      .filter(a => a.status !== "cancelled")
-      .map(a => Number(a.job_id))
+      .filter((a) => a.status !== "cancelled")
+      .map((a) => Number(a.job_id))
   );
 
-  return (
-    <div className="dashboard-layout">
+
+return (
+  <div className="dashboard-layout">
+
+    <StudentResponsibilityPopup />
+
+    {/* SIDEBAR (like employer sidebar) */}
+
+  <div className="dashboard-body">
+    <div
+      className={`notification-wrapper ${showSidebar ? "open" : "close"}`}
+    >
+      <NotificationPanel
+        openSection={openSection}
+        toggleSection={toggleSection}
+        accepted={accepted}
+        rejected={rejected}
+        pending={pending}
+        pastJobs={pastJobs}
+        jobs={jobs}
+        setSelectedJob={setSelectedJob}
+        setConfirmCancel={setConfirmCancel}
+        setFeedbackAppId={setFeedbackAppId}
+        setShowTnc={setShowTnc}
+        setShowSidebar={setShowSidebar}
+        handleLogout={handleLogout}
+      />
+    </div>
+
+    {/* MAIN AREA (like empD-main) */}
+    <div className="dashboard-main">
+
+      {/* NAVBAR */}
       <div className="navbar">
         <div className="nav-left">
-          <button
-            className="menu-btn"
-            onClick={() => setShowSidebar(prev => !prev)}
-          >
-            ☰
-          </button>
           <div className="logo">
             <img src={logo} alt="Logo" />
           </div>
         </div>
 
-        <h3 className="nav-title">JOB ON CAMPUS UMS (STUDENT)</h3>
+        <h3 className="nav-title">
+          JOB ON CAMPUS UMS (STUDENT)
+        </h3>
 
         <div className="nav-right">
-          <button className="logout-btn" onClick={handleLogout}>
-            Logout
+          <button
+            className="menu-btn"
+            onClick={() => setShowSidebar((prev) => !prev)}
+          >
+            ☰
           </button>
         </div>
       </div>
-      <div className="dashboard-body">
-        <div className={`notification-wrapper ${showSidebar ? "open" : ""}`}>
-          <NotificationPanel
-            openSection={openSection}
-            toggleSection={toggleSection}
-            accepted={accepted}
-            rejected={rejected}
-            pending={pending}
-            pastJobs={pastJobs}
-            jobs={jobs}
-            setSelectedJob={setSelectedJob}
-            setConfirmCancel={setConfirmCancel}
-            setFeedbackAppId={setFeedbackAppId}
-            setShowTnc={setShowTnc}
-            setShowSidebar={setShowSidebar}
-          />
-        </div>
-        <div className="dashboard-content">
+
+       <div className="dashboard-main-content">
           <div className="search-bar">
             <input
               type="text"
@@ -236,41 +229,46 @@ export default function StudentDashboard() {
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
+
           <div className="container-joblist">
+            {[...filteredJobs]
+              .sort((a, b) => b.id - a.id)
+              .map((job) => {
+                const isApplied = appliedJobsSet.has(Number(job.id));
 
-          {[...filteredJobs]
-            .sort((a, b) => b.id - a.id)
-            .map(job => {
-              const isApplied = appliedJobsSet.has(Number(job.id));
-
-              return (
-                <JobCard
-                  key={job.id}
-                  job={job}
-                  isApplied={isApplied}
-                  onClick={() => setSelectedJob(job)}
-                  onApplyClick={() => setConfirmJob(job)}
-                />
-              );
-            })}
-         </div>
+                return (
+                  <JobCard
+                    key={job.id}
+                    job={job}
+                    isApplied={isApplied}
+                    onClick={() => setSelectedJob(job)}
+                    onApplyClick={() => setConfirmJob(job)}
+                  />
+                );
+              })}
+          </div>
         </div>
       </div>
 
+</div>
       {showSidebar && (
         <div
           className="sidebar-overlay"
           onClick={() => setShowSidebar(false)}
         />
       )}
-      {showTnc && (
-        <TermsAndConditions onClose={() => setShowTnc(false)} />
-      )}
+
+      {showTnc && <TermsAndConditions onClose={() => setShowTnc(false)} />}
 
       {feedbackAppId && (
-        <div className="modal-overlay" onClick={() => setFeedbackAppId(null)}>
-          <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-
+        <div
+          className="modal-overlay"
+          onClick={() => setFeedbackAppId(null)}
+        >
+          <div
+            className="modal-card"
+            onClick={(e) => e.stopPropagation()}
+          >
             <h2>Give Feedback</h2>
 
             <textarea
@@ -292,7 +290,6 @@ export default function StudentDashboard() {
                 Cancel
               </button>
             </div>
-
           </div>
         </div>
       )}
@@ -300,7 +297,6 @@ export default function StudentDashboard() {
       {confirmJob && (
         <div className="modal-overlay" onClick={() => setConfirmJob(null)}>
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-
             <h2>⚠️ Confirm Apply</h2>
             <h3>{confirmJob.job_type}</h3>
 
@@ -322,19 +318,18 @@ export default function StudentDashboard() {
                 No
               </button>
             </div>
-
           </div>
         </div>
       )}
+
       {confirmCancel && (
         <div className="modal-overlay" onClick={() => setConfirmCancel(null)}>
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-
             <h2>Cancel Application?</h2>
 
             <div className="modal-actions">
               <button
-                className="confirm-btn danger"
+                className="confirm-btn"
                 onClick={() => {
                   cancelApplication(confirmCancel);
                   setConfirmCancel(null);
@@ -350,7 +345,6 @@ export default function StudentDashboard() {
                 No
               </button>
             </div>
-
           </div>
         </div>
       )}
@@ -358,22 +352,38 @@ export default function StudentDashboard() {
       {selectedJob && (
         <div className="modal-overlay" onClick={() => setSelectedJob(null)}>
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-
             <h2>{selectedJob.job_type}</h2>
 
-            <p><b>Company:</b> {selectedJob.business_type}</p>
-            <p><b>Location:</b> {selectedJob.location}</p>
-            <p><b>Phone:</b> {selectedJob.phone}</p>
+            <p>
+              <b>Company:</b> {selectedJob.business_type}
+            </p>
+            <p>
+              <b>Location:</b> {selectedJob.location}
+            </p>
+            <p>
+              <b>Phone:</b> {selectedJob.phone}
+            </p>
 
-            <p><b>Start Date:</b> {selectedJob.start_date}</p>
-            <p><b>End Date:</b> {selectedJob.end_date}</p>
+            <p>
+              <b>Start Date:</b> {selectedJob.start_date}
+            </p>
+            <p>
+              <b>End Date:</b> {selectedJob.end_date}
+            </p>
 
-            <p><b>Work Time:</b> {selectedJob.work_time}</p>
-            <p><b>Salary:</b> {selectedJob.salary_estimate}</p>
-            <p><b>Workers:</b> {selectedJob.num_workers}</p>
+            <p>
+              <b>Work Time:</b> {selectedJob.work_time}
+            </p>
+            <p>
+              <b>Salary:</b> {selectedJob.salary_estimate}
+            </p>
+            <p>
+              <b>Workers:</b> {selectedJob.num_workers}
+            </p>
 
-            <p><b>Criteria:</b> {selectedJob.criteria}</p>
-
+            <p>
+              <b>Criteria:</b> {selectedJob.criteria}
+            </p>
 
             <button
               className="close-btn"
@@ -381,11 +391,9 @@ export default function StudentDashboard() {
             >
               Close
             </button>
-
           </div>
         </div>
       )}
-
     </div>
   );
 }

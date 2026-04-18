@@ -60,7 +60,7 @@ function AdminDashboard() {
 
         <div className="nav-right">
           <button className="logout-btn" onClick={handleLogout}>
-            Logout 🚪
+            Logout
           </button>
         </div>
 
@@ -96,7 +96,7 @@ function AdminDashboard() {
         <div className="quick-actions">
 
           <div className="action-card" onClick={() => navigate("/admin/student-report")}>
-            👤 Manage Users
+            👤 Manage Students
           </div>
 
           <div className="action-card" onClick={() => navigate("/admin/full-report")}>
@@ -109,7 +109,7 @@ function AdminDashboard() {
 
         </div>
 
-        <h2 className="section-title">⛔ Pending Employers</h2>
+        <h2 className="section-title">⛔ Pending Employers ⛔</h2>
 
         <div className="grid">
 

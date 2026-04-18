@@ -1,5 +1,6 @@
 import React from "react";
 import "../css/NotificationPanel.css";
+import logo from "../../images/LOGOMPP.png";
 
 export default function NotificationPanel({
   openSection,
@@ -13,95 +14,114 @@ export default function NotificationPanel({
   setConfirmCancel,
   setFeedbackAppId,
   setShowTnc,
-  setShowSidebar
+  setShowSidebar,
+  handleLogout, // 👈 ADD THIS
 }) {
   return (
     <div className="notification-panel">
 
-      <h3>DASHBOARD</h3>
-
-      <div onClick={() => toggleSection("accepted")} className="title accepted">
-        🟢 Accepted
+      <div className="logo">
+        <img src={logo} alt="Logo" />
       </div>
 
-      {openSection === "accepted" &&
-        accepted.map(a => (
-          <p
-            key={a.id}
-            onClick={() => {
-              const job = jobs.find(j => j.id === a.job_id);
-              if (job) setSelectedJob(job);
-              setShowSidebar(false);
-            }}
-          >
-            {a.job_type}
-          </p>
-        ))
-      }
-
-      <div onClick={() => toggleSection("rejected")} className="title rejected">
-        🔴 Rejected
+      {/* HEADER */}
+      <div className="np-header">
+        <h4>STUDENT PANEL</h4>
       </div>
 
-      {openSection === "rejected" &&
-        rejected.map(a => (
-          <p key={a.id}>🔴 {a.job_type}</p>
-        ))
-      }
+      <div className="np-content">
 
-      <div onClick={() => toggleSection("pending")} className="title pending">
-        🟡 Pending
-      </div>
+        {/* ACCEPTED */}
+        <div onClick={() => toggleSection("accepted")} className="title accepted">
+          🟢 Accepted
+        </div>
 
-      {openSection === "pending" &&
-        pending.map(a => (
-          <div key={a.id} className="pending-item">
-            <span>{a.job_type}</span>
-            <button
-              className="cancel-mini-btn"
+        {openSection === "accepted" &&
+          accepted.map((a) => (
+            <p
+              key={a.id}
               onClick={() => {
-                setConfirmCancel(a.job_id);
+                const job = jobs.find((j) => j.id === a.job_id);
+                if (job) setSelectedJob(job);
                 setShowSidebar(false);
               }}
             >
-              Cancel
-            </button>
-          </div>
-        ))
-      }
+              🟢 {a.job_type}
+            </p>
+          ))}
 
-      <div onClick={() => toggleSection("past")} className="title">
-        📌 Past Jobs
-      </div>
+        {/* REJECTED */}
+        <div onClick={() => toggleSection("rejected")} className="title rejected">
+          🔴 Rejected
+        </div>
 
-      {openSection === "past" &&
-        (pastJobs.length === 0 ? (
-          <p>No past jobs</p>
-        ) : (
-          pastJobs.map(a => (
-            <div key={a.id}>
-              <span>✔ {a.job_type}</span>
+        {openSection === "rejected" &&
+          rejected.map((a) => (
+            <p key={a.id}>🔴 {a.job_type}</p>
+          ))}
+
+        {/* PENDING */}
+        <div onClick={() => toggleSection("pending")} className="title pending">
+          🟡 Pending
+        </div>
+
+        {openSection === "pending" &&
+          pending.map((a) => (
+            <div key={a.id} className="pending-item">
+              <span>{a.job_type}</span>
               <button
+                className="cancel-mini-btn"
                 onClick={() => {
-                  setFeedbackAppId(a.id);
+                  setConfirmCancel(a.job_id);
                   setShowSidebar(false);
                 }}
               >
-                Give Feedback
+                Cancel
               </button>
             </div>
-          ))
-        ))
-      }
+          ))}
 
-      <div
-        onClick={() => {
-          setShowTnc(true);
-          setShowSidebar(false);
-        }}
-        className="title"
-      >
-        📜 Terms & Conditions
+        {/* PAST */}
+        <div onClick={() => toggleSection("past")} className="title">
+          📌 Past Jobs
+        </div>
+
+        {openSection === "past" &&
+          (pastJobs.length === 0 ? (
+            <p>No past jobs</p>
+          ) : (
+            pastJobs.map((a) => (
+              <div key={a.id}>
+                <span>✔ {a.job_type}</span>
+                <button
+                  onClick={() => {
+                    setFeedbackAppId(a.id);
+                    setShowSidebar(false);
+                  }}
+                >
+                  Feedback
+                </button>
+              </div>
+            ))
+          ))}
+
+        {/* TERMS */}
+        <div
+          onClick={() => {
+            setShowTnc(true);
+            setShowSidebar(false);
+          }}
+          className="title"
+        >
+          📜 Terms & Conditions
+        </div>
+      </div>
+
+      {/* FOOTER (LOGOUT FIXED BOTTOM) */}
+      <div className="np-footer">
+        <button className="logout-btnNoti" onClick={handleLogout}>
+           Logout
+        </button>
       </div>
 
     </div>

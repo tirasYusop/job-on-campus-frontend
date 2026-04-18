@@ -2,72 +2,12 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
-  width: 100%;
   height: 100%;
-}
-
-/* =========================
-   NAVBAR
-========================= */
-.navbar {
-  width: 100%;
-  background-color: #356f73;
-  color: white;
-  padding: 15px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-/* LEFT SIDE (logo + menu button) */
-.nav-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-/* CENTER TITLE */
-.nav-title {
-  flex: 1;
-  text-align: center;
-  margin: 0;
-  font-size: 18px;
-  font-weight: 600;
-}
-
-/* LOGO */
-.logo img {
-  height: 40px;
-  width: auto;
-  object-fit: contain;
-  cursor: pointer;
-}
-
-/* LOGOUT BUTTON */
-.logout-btn {
-  background: #e74c3c;
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-/* MENU BUTTON (mobile only) */
-.menu-btn {
-  display: none;
-  background: transparent;
-  border: none;
-  font-size: 22px;
-  color: white;
-  cursor: pointer;
+  font-family: Arial, sans-serif;
 }
 
 /* =========================
@@ -77,33 +17,94 @@ html, body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  overflow: hidden;
 }
 
 .dashboard-body {
   display: flex;
   flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 /* =========================
-   SIDEBAR (NOTIFICATIONS)
+   SIDEBAR
 ========================= */
 .notification-wrapper {
   width: 20%;
-  background: white;
+  min-width: 260px;
+  background: #356f73;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
 }
 
 /* =========================
-   MAIN CONTENT (JOB LIST)
+   MAIN AREA
 ========================= */
-.dashboard-content {
-  width: 80%;
-  flex: none;
-  background: #f4f6f8;
+.dashboard-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.dashboard-main-content {
+  flex: 1;
   overflow-y: auto;
+  background: #f4f6f8;
   padding: 20px;
 }
 
-/* SEARCH BAR */
+/* =========================
+   NAVBAR
+========================= */
+.navbar {
+  width: 100%;
+  background: #356f73;
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-title {
+  flex: 1;
+  text-align: center;
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.logo img {
+  height: 40px;
+  object-fit: contain;
+  cursor: pointer;
+}
+
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: white;
+  cursor: pointer;
+}
+
+/* =========================
+   SEARCH BAR
+========================= */
 .search-bar {
   padding: 20px;
   display: flex;
@@ -119,27 +120,27 @@ html, body {
   border: 1px solid #e0e0e0;
   font-size: 14px;
   background: #fff;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
   outline: none;
 }
 
 .search-bar input:focus {
   border-color: #2c3e50;
-  box-shadow: 0 6px 18px rgba(44,62,80,0.15);
+  box-shadow: 0 6px 18px rgba(44, 62, 80, 0.15);
 }
 
-/* SEARCH ICON */
 .search-bar::before {
   content: "🔍";
   position: absolute;
   left: 35px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 14px;
   opacity: 0.6;
 }
 
-/* JOB LIST */
+/* =========================
+   JOB LIST
+========================= */
 .container-joblist {
   display: flex;
   flex-direction: column;
@@ -148,12 +149,12 @@ html, body {
 }
 
 /* =========================
-   MODALS
+   MODAL
 ========================= */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.55);
+  background: rgba(0, 0, 0, 0.55);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -167,13 +168,19 @@ html, body {
   width: 90%;
   max-width: 420px;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   animation: modalPop 0.18s ease-in-out;
 }
 
 @keyframes modalPop {
-  from { transform: scale(0.85); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .modal-actions {
@@ -195,16 +202,17 @@ html, body {
   color: white;
 }
 
-.cancel-btn {
-  background: #e74c3c;
+.modal-actions .cancel-btn {
+  background: #27ae60;
   color: white;
 }
+
 
 .confirm-btn.danger {
   background: #c0392b;
 }
 
-/* CLOSE BUTTON */
+
 .close-btn {
   margin-top: 15px;
   padding: 10px 16px;
@@ -216,63 +224,40 @@ html, body {
 }
 
 /* =========================
-   MOBILE VIEW
+   MOBILE
 ========================= */
 @media (max-width: 768px) {
-
-  .navbar {
-    padding: 10px 15px;
+  .dashboard-body {
+    flex-direction: column;
+  }
+    .navbar {
+    padding: 8px 12px; /* smaller height */
   }
 
   .logo img {
-    height: 15px;
+    height: 15px; /* smaller logo */
+  }
+
+  .nav-title {
+    font-size: 12px; /* smaller title */
+    line-height: 1.2;
+  }
+
+  .menu-btn {
+    font-size: 18px; /* slightly smaller menu icon */
+    display: block;
+  }
+
+  .notification-wrapper {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .dashboard-main-content {
+    padding: 15px;
   }
 
   .nav-title {
     font-size: 13px;
-  }
-
-  .menu-btn {
-    display: block;
-  }
-
-  .dashboard-body {
-    flex-direction: column;
-  }
-
-  .dashboard-content {
-    width: 100%;
-    padding: 15px;
-  }
-
-  /* =========================
-     FIXED SIDEBAR (IMPORTANT FIX)
-  ========================= */
-  .notification-wrapper {
-    position: fixed;
-    right: 0;
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
-  }
-
-  .notification-wrapper.open {
-    transform: translateX(0);
-  }
-
-  /* OVERLAY (must cover everything) */
-  .sidebar-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.4);
-    z-index: 1500;
-  }
-}
-
-/* =========================
-   DESKTOP FIX (SIDEBAR ALWAYS OPEN)
-========================= */
-@media (min-width: 769px) {
-  .notification-wrapper {
-    transform: none !important;
   }
 }

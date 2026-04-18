@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/Login.css";
 import api from "../api";
+import TermsPopup from "../component/TermsPopup";
 
 
 function Login() {
@@ -38,53 +39,76 @@ function Login() {
   return (
     <div className="login-page">
 
-      <div className="login-card animate-card">
+      <TermsPopup />
 
-        <h2 className="login-title">🔐 Login</h2>
-        <p className="login-sub">Welcome to Job Campus, Please Sign In.</p>
+      {/* WRAPPER */}
+      <div className="login-container">
 
-        <div className="login-form">
+        <div className="welcome-box">
+          <h1>🎓 Welcome to</h1>
+          <h2>Job On Campus UMS</h2>
 
-          {/* LOGIN ID (Student ID / Username / Email) */}
-          <input
-            className="login-input"
-            id="loginId"
-            name="loginId"
-            autoComplete="username"
-            placeholder="Student ID / Username / Email"
-            value={loginId}
-            onChange={(e) => setLoginId(e.target.value)}
-          />
+          <p>
+            Connect with employers, explore opportunities, and manage your
+            campus career in one place.
+          </p>
 
-          {/* PASSWORD */}
-          <input
-            className="login-input"
-            id="password"
-            name="password"
-            type="password"
-            autoComplete="current-password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+            <div className="welcome-extra">
+            <ul>
+                <li>✔ Find jobs easily</li>
+                <li>✔ Apply in seconds</li>
+                <li>✔ Track applications</li>
+              </ul>
+
+              <div className="quote">
+                “Your future starts here.”
+              </div>
+            </div>
+        </div>
+
+
+               {/* YOUR EXISTING CARD (UNCHANGED) */}
+        <div className="login-card animate-card">
+
+          <h2 className="login-title">🔐 Login</h2>
+          <p className="login-sub">Welcome to Job Campus, Please Sign In.</p>
+
+          <div className="login-form">
+
+            <input
+              className="login-input"
+              placeholder="Student ID / Username / Email"
+              value={loginId}
+              onChange={(e) => setLoginId(e.target.value)}
+            />
+
+            <input
+              className="login-input"
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+
+          </div>
+
+          <button className="login-btn" onClick={handleLogin}>
+            Login
+          </button>
+
+          <button
+            className="login-register-btn"
+            onClick={() => navigate("/register")}
+          >
+            Create Account
+          </button>
 
         </div>
 
-        <button className="login-btn" onClick={handleLogin}>
-          Login
-        </button>
-
-        <button
-          className="login-register-btn"
-          onClick={() => navigate("/register")}
-        >
-          Create Account
-        </button>
-
+ 
       </div>
-
     </div>
   );
-}
+  }
 
 export default Login;

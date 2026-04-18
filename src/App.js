@@ -15,6 +15,7 @@ import JobPost from "./pages/JobPost";
 import StudentReport from "./pages/admin/StudentReport";
 import EmployerReport from "./pages/admin/EmployerReport";
 import FullReport from "./pages/admin/FullReport";
+import EmployerProfile from "./pages/EmployerProfile"
 
 
 
@@ -44,6 +45,7 @@ function App() {
         <Route path="/admin/student-report" element={<StudentReport />} />
         <Route path="/admin/employer-report" element={<EmployerReport />} />
         <Route path="/admin/full-report" element={<FullReport />} />
+        <Route path="/employer/EmployerProfile" element={<EmployerProfile />} />
 
         
       </Routes>

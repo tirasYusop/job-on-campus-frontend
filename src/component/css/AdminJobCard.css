@@ -1,0 +1,81 @@
+.admin-job-card {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  transition: 0.2s ease;
+}
+
+.admin-job-card:hover {
+  transform: translateY(-2px);
+}
+
+.job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.job-header h3 {
+  font-size: 16px;
+  margin: 0;
+}
+
+.job-location {
+  font-size: 13px;
+  color: #666;
+}
+
+.job-body p {
+  margin: 5px 0;
+  font-size: 13px;
+  color: #333;
+}
+
+.date-row {
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #777;
+}
+
+/* 🔥 BADGE */
+.closing-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ff4d4f;
+  color: white;
+  padding: 4px 8px;
+  font-size: 11px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+
+
+/* 📱 MOBILE */
+@media (max-width: 768px) {
+  .admin-job-card {
+    padding: 12px;
+  }
+
+  .job-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .date-row {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .job-body p {
+    font-size: 12px;
+  }
+}

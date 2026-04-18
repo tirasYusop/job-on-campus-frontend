@@ -1,0 +1,101 @@
+/* =========================
+   BACKDROP (overlay)
+========================= */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+/* =========================
+   MODAL BOX
+========================= */
+.modal-card {
+  background: #fff;
+  width: 500px;
+  max-width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.2s ease-in-out;
+  text-align: center;
+}
+
+/* =========================
+   TITLE
+========================= */
+.modal-card h2 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #333;
+}
+
+/* =========================
+   COMPLAINT ITEM
+========================= */
+.complaint-item {
+  background: #f7f7f7;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border-left: 4px solid #ff4d4d;
+}
+
+.complaint-item p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #444;
+}
+
+/* =========================
+   CLOSE BUTTON
+========================= */
+.modal-card button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  border: none;
+  background: #ff4d4d;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.modal-card button:hover {
+  background: #e60000;
+}
+
+/* =========================
+   ANIMATION
+========================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* =========================
+   SCROLL BAR (optional clean UI)
+========================= */
+.modal-card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-card::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}

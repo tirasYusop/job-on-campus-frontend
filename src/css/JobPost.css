@@ -5,19 +5,6 @@
   min-height: 100vh;
 }
 
-/* ================= NAVBAR ================= */
-.job-navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 25px;
-  background: white;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
 .nav-left {
   font-weight: bold;
 }

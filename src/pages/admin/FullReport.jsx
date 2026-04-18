@@ -13,6 +13,7 @@ import {
 
 import "../../css/AdminPages.css";
 import api from "../../api";
+import AdminNavbar from "../../component/admin/AdminNavBar";
 
 ChartJS.register(
   CategoryScale,
@@ -48,13 +49,26 @@ function FullReport() {
     setModalType("complaint");
   };
 
+  const barOptions = {
+  responsive: true,
+  scales: {
+    y: {
+      ticks: {
+        stepSize: 2,  
+      },
+      beginAtZero: true
+    }
+  }
+};
   if (!data) return <p>Loading analytics...</p>;
 
+  const safeData = data || {};
   const safeAccepted = data.weekly_accepted || [];
+  const safeRejected = data.weekly_rejected || [];
   const safeCancelled = data.weekly_cancelled || [];
+  const safePending = data.weekly_pending || [];
   const safeFaculty = data.faculty_stats || [];
   const safeCollege = data.college_stats || [];
-
   const acceptedChart = {
     labels: safeAccepted.map(w => w.date),
     datasets: [
@@ -66,19 +80,41 @@ function FullReport() {
     ]
   };
 
+  const rejectedChart = {
+    labels: safeRejected.map(w => w.date),
+    datasets: [
+      {
+        label: "Rejected",
+        data: safeRejected.map(w => w.total_rejected),
+        backgroundColor: "#ef4444",
+      }
+    ]
+  };
+
   const cancelledChart = {
     labels: safeCancelled.map(w => w.date),
     datasets: [
       {
         label: "Cancelled",
         data: safeCancelled.map(w => w.total_cancelled),
-        backgroundColor: "#ef4444",
+        backgroundColor: "#f97316",
+      }
+    ]
+  };
+
+  const pendingChart = {
+    labels: safePending.map(w => w.date),
+    datasets: [
+      {
+        label: "Pending",
+        data: safePending.map(w => w.total_pending),
+        backgroundColor: "#eab308",
       }
     ]
   };
 
   const facultyChart = {
-    labels: safeFaculty.map(f => f.fakulti),
+    labels: safeFaculty.map(f => (f.fakulti || "").toUpperCase()),
     datasets: [
       {
         data: safeFaculty.map(f => f.total),
@@ -88,7 +124,7 @@ function FullReport() {
   };
 
   const collegeChart = {
-    labels: safeCollege.map(c => c.kolej),
+    labels: safeCollege.map(c => (c.kolej || "").toUpperCase()),
     datasets: [
       {
         data: safeCollege.map(c => c.total),
@@ -99,52 +135,144 @@ function FullReport() {
 
   return (
     <div className="admin-page">
+            <AdminNavbar title="📊 Analytics Dashboard" backTo="/admin-dashboard" />
+      <div className="contain-page">
 
-      <h2>📊 Analytics Dashboard</h2>
-
-      {/* KPI */}
       <div className="stats-grid">
-        <div className="stat-card"><h3>{data.total_users}</h3><p>Total Users</p></div>
-        <div className="stat-card"><h3>{data.total_students}</h3><p>Students</p></div>
-        <div className="stat-card"><h3>{data.active_jobs}</h3><p>Active Jobs</p></div>
-        <div className="stat-card"><h3>{data.expired_jobs}</h3><p>Expired Jobs</p></div>
-        <div className="stat-card"><h3>{data.total_employers}</h3><p>Employers</p></div>
+
+        <div className="stat-card">
+          <h3>{safeData.total_users}</h3>
+          <p>Total Users</p>
+        </div>
+
+        <div className="stat-card">
+          <h3>{safeData.total_students}</h3>
+          <p>Students</p>
+        </div>
+
+        <div className="stat-card">
+          <h3>{safeData.total_employers}</h3>
+          <p>Employers</p>
+        </div>
+
+        <div className="stat-card">
+          <h3>{safeData.total_jobs}</h3>
+          <p>Total Jobs</p>
+        </div>
+
+        <div className="stat-card">
+          <h3>{safeData.active_jobs}</h3>
+          <p>Active Jobs</p>
+        </div>
+
+        <div className="stat-card">
+          <h3>{safeData.expired_jobs}</h3>
+          <p>Expired Jobs</p>
+        </div>
 
         <div className="stat-card" onClick={openFeedback} style={{ cursor: "pointer" }}>
-          <h3>{data.total_feedback}</h3>
+          <h3>{safeData.total_feedback}</h3>
           <p>Student Feedback</p>
         </div>
 
         <div className="stat-card" onClick={openComplaint} style={{ cursor: "pointer" }}>
-          <h3>{data.total_complaints}</h3>
+          <h3>{safeData.total_complaints}</h3>
           <p>Employer Complaints</p>
         </div>
 
-        <div className="stat-card"><h3>{data.total_applications}</h3><p>Total Applications</p></div>
-        <div className="stat-card"><h3>{data.total_jobs}</h3><p>Total Jobs</p></div>
-        <div className="stat-card"><h3>{data.total_cancelled}</h3><p>Cancelled</p></div>
-        <div className="stat-card"><h3>{data.cancel_rate}%</h3><p>Cancel Rate</p></div>
-        <div className="stat-card"><h3>{data.cancel_rate}%</h3><p>Accepted Rate</p></div>
+        <div className="stat-card">
+          <h3>{safeData.total_applications}</h3>
+          <p>Total Applications</p>
+        </div>
+
+        <div className="stat-card">
+          <h3>{safeData.total_accepted}</h3>
+          <p>Accepted</p>
+        </div>
+
+        <div className="stat-card">
+          <h3>{safeData.total_rejected}</h3>
+          <p>Rejected</p>
+        </div>
+
+        <div className="stat-card">
+          <h3>{safeData.pending_apps}</h3>
+          <p>Pending</p>
+        </div>
+
+        <div className="stat-card">
+          <h3>{safeData.total_cancelled}</h3>
+          <p>Cancelled</p>
+        </div>
+
+        {/* RATES */}
+        <div className="stat-card">
+          <h3>{safeData.accepted_rate}%</h3>
+          <p>Accepted Rate</p>
+        </div>
+
+        <div className="stat-card">
+          <h3>{safeData.rejected_rate}%</h3>
+          <p>Rejected Rate</p>
+        </div>
+
+        <div className="stat-card">
+          <h3>{safeData.pending_rate}%</h3>
+          <p>Pending Rate</p>
+        </div>
+
+        <div className="stat-card">
+          <h3>{safeData.cancel_rate}%</h3>
+          <p>Cancel Rate</p>
+        </div>
+
       </div>
 
-      {/* CHARTS */}
       <div className="charts-grid">
-        <div className="chart-card"><h3>📅 Weekly Accepted</h3><Bar data={acceptedChart} /></div>
-        <div className="chart-card"><h3>❌ Weekly Cancelled</h3><Bar data={cancelledChart} /></div>
-        <div className="chart-card"><h3>🎓 Faculty Distribution</h3><Pie data={facultyChart} /></div>
-        <div className="chart-card"><h3>🏫 College Distribution</h3><Pie data={collegeChart} /></div>
-      </div>
 
-      {/* MODAL */}
+        <div className="chart-card">
+          <h3>📅 Weekly Accepted</h3>
+          <Bar data={acceptedChart} options={barOptions} />
+        </div>
+
+        <div className="chart-card">
+          <h3>❌ Weekly Rejected</h3>
+          <Bar data={rejectedChart}options={barOptions} />
+        </div>
+
+        <div className="chart-card">
+          <h3>🚫 Weekly Cancelled</h3>
+          <Bar data={cancelledChart} options={barOptions}/>
+        </div>
+
+        <div className="chart-card">
+          <h3>⏳ Weekly Pending</h3>
+          <Bar data={pendingChart}options={barOptions} />
+        </div>
+
+        <div className="chart-card">
+          <h3>🎓 Faculty Distribution</h3>
+          <Pie data={facultyChart} />
+        </div>
+
+        <div className="chart-card">
+          <h3>🏫 College Distribution</h3>
+          <Pie data={collegeChart} />
+        </div>
+
+      </div>
       {modalType && (
         <div className="modal-backdrop" onClick={() => setModalType(null)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
 
             <h3>
-              {modalType === "feedback" ? "Student Feedback" : "Employer Complaints"}
+              {modalType === "feedback"
+                ? "Student Feedback"
+                : "Employer Complaints"}
             </h3>
 
             <div className="modal-content">
+
               {modalType === "feedback" &&
                 feedbackList.map(f => (
                   <div key={f.id}>
@@ -162,13 +290,15 @@ function FullReport() {
                   </div>
                 ))
               }
+
             </div>
 
             <button onClick={() => setModalType(null)}>Close</button>
+
           </div>
         </div>
       )}
-
+    </div>
     </div>
   );
 }

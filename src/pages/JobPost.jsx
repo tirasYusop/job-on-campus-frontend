@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../css/JobPost.css";
 import api from "../api";
+import JobPostCard from "../component/Employer/JobPostCard";
 
 const emptyForm = {
   job_type: "",
@@ -24,6 +25,7 @@ export default function JobPost() {
   const isEdit = !!editJob;
 
   const [formData, setFormData] = useState(emptyForm);
+
   useEffect(() => {
     if (isEdit) {
       setFormData({
@@ -50,6 +52,17 @@ export default function JobPost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // ✅ EXTRA FRONTEND VALIDATION
+    const today = new Date().toISOString().split("T")[0];
+
+    if (formData.start_date < today) {
+      return alert("Start date cannot be in the past");
+    }
+
+    if (formData.end_date < formData.start_date) {
+      return alert("End date must be after start date");
+    }
+
     try {
       if (isEdit) {
         await api.put(
@@ -57,7 +70,6 @@ export default function JobPost() {
           formData,
           { withCredentials: true }
         );
-
         alert("Job updated successfully!");
       } else {
         await api.post(
@@ -65,7 +77,6 @@ export default function JobPost() {
           formData,
           { withCredentials: true }
         );
-
         alert("Job posted successfully!");
       }
 
@@ -80,10 +91,10 @@ export default function JobPost() {
   return (
     <div className="job-page">
 
-      <div className="job-navbar">
+      <div className="admin-navbar">
         <div className="nav-left">
           <button onClick={() => navigate("/employer-dashboard")}>
-            ← Back
+            ← 
           </button>
         </div>
 
@@ -93,104 +104,12 @@ export default function JobPost() {
       </div>
 
       <div className="job-container">
-        <div className="job-card">
-
-          <h1 className="job-title">
-            {isEdit ? "✏️ Edit Job" : "📌 Post New Job"}
-          </h1>
-
-          <form onSubmit={handleSubmit} className="job-form">
-
-            <input
-              name="job_type"
-              placeholder="Job Type"
-              value={formData.job_type}
-              onChange={handleChange}
-              required
-            />
-
-            <input
-              name="business_type"
-              placeholder="Business Type"
-              value={formData.business_type}
-              onChange={handleChange}
-              required
-            />
-
-            <input
-              name="phone"
-              placeholder="Phone Number"
-              value={formData.phone}
-              onChange={handleChange}
-              required
-            />
-
-            <input
-              name="location"
-              placeholder="Location"
-              value={formData.location}
-              onChange={handleChange}
-              required
-            />
-
-            <div className="job-row">
-              <input
-                type="date"
-                name="start_date"
-                value={formData.start_date}
-                onChange={handleChange}
-                required
-              />
-
-              <input
-                type="date"
-                name="end_date"
-                value={formData.end_date}
-                onChange={handleChange}
-                required
-              />
-            </div>
-
-            <input
-              name="work_time"
-              placeholder="Work Time (e.g 9AM - 5PM)"
-              value={formData.work_time}
-              onChange={handleChange}
-              required
-            />
-
-            <input
-              name="salary_estimate"
-              placeholder="Salary (e.g RM100/day)"
-              value={formData.salary_estimate}
-              onChange={handleChange}
-              required
-            />
-
-            <input
-              type="number"
-              name="num_workers"
-              placeholder="Number of Workers"
-              value={formData.num_workers}
-              onChange={handleChange}
-              required
-            />
-
-            <textarea
-              name="criteria"
-              placeholder="Job Criteria"
-              value={formData.criteria}
-              onChange={handleChange}
-              required
-            />
-
-            <button type="submit" className="job-btn">
-              {isEdit ? "Update Job" : "Post Job"}
-            </button>
-
-          </form>
-
-        </div>
+        <JobPostCard
+          formData={formData}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          isEdit={isEdit}
+        />
       </div>
 
     </div>

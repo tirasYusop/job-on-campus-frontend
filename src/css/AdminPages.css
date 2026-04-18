@@ -8,30 +8,27 @@
 
 /* PAGE WRAPPER */
 .admin-page {
-  padding: 24px;
   background: #f4f6f8;
   min-height: 100vh;
 }
+.section-title{
+  padding : 10px;
+  text-align: center;
 
-/* HEADER */
-.admin-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  margin-bottom: 24px;
-  padding: 16px 20px;
-
-  background: white;
-  border-radius: 14px;
-
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+.contain-page{
+  padding: 10px;
 }
 
-.admin-header h2 {
-  font-size: 22px;
-  color: #2c3e50;
-  font-weight: 600;
+.close-btn {
+  margin-top: 15px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #667eea;
+  color: white;
+  cursor: pointer;
 }
 
 /* FILTER */
@@ -40,7 +37,7 @@
   border-radius: 10px;
   border: 1px solid #ddd;
   background: white;
-
+  margin: 24px;
   outline: none;
   transition: 0.2s;
 }
@@ -162,22 +159,9 @@ tr:hover {
   background: white;
   padding: 18px;
   border-radius: 14px;
-
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
 
 .modal-box {
   background: white;
@@ -216,7 +200,48 @@ tr:hover {
   transform: translateY(-3px);
 }
 
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* 🔥 THIS IS THE FIX */
 .modal-box.large {
   width: 90%;
   max-width: 900px;
+  max-height: 85vh;   /* important */
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  overflow: hidden;   /* important */
+  display: flex;
+  flex-direction: column;
+}
+
+/* 🔥 scroll area for job list */
+.modal-content-scroll {
+  overflow-y: auto;
+  flex: 1;
+  padding-right: 8px;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr; /* 🔥 single column */
+    gap: 12px;
+    padding: 0 10px;
+  }
+
+  .emp-card {
+    width: 100%;
+    box-sizing: border-box;
+  }
 }

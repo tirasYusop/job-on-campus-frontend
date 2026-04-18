@@ -8,7 +8,6 @@
   font-family: "Segoe UI", sans-serif;
 }
 
-/* CARD */
 .login-card {
   background: white;
   padding: 35px;
@@ -19,6 +18,112 @@
   transform: translateY(20px);
   opacity: 0;
   animation: fadeUp 0.5s ease forwards;
+}
+
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}
+
+.welcome-box {
+  width: 380px;
+  animation: slideInLeft 0.6s ease;
+}
+
+.welcome-box h1 {
+  font-size: 22px;
+  margin: 0;
+  color: #333;
+}
+
+.welcome-box h2 {
+  font-size: 30px;
+  margin-top: 5px;
+  color: #667eea;
+}
+
+.welcome-box p {
+  margin-top: 15px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.welcome-box ul {
+  margin-top: 15px;
+  padding-left: 18px;
+  color: #444;
+}
+
+.welcome-box li {
+  margin-bottom: 6px;
+}
+
+.quote {
+  margin-top: 20px;
+  font-style: italic;
+  color: #667eea;
+  font-weight: 500;
+}
+
+/* ANIMATION */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .login-container {
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+  }
+
+  /* MAKE WELCOME SMALLER ON MOBILE */
+  .welcome-box {
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
+    transform: scale(0.95);
+  }
+
+  .welcome-box h1 {
+    font-size: 18px;
+  }
+
+  .welcome-box h2 {
+    font-size: 22px;
+  }
+
+  .welcome-box p {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .welcome-box ul {
+    font-size: 13px;
+  }
+
+  .quote {
+    font-size: 13px;
+  }
+
+  /* LOGIN CARD FULL WIDTH FEEL */
+  .login-card {
+    width: 100%;
+    max-width: 340px;
+  }
+    .welcome-extra {
+    display: none;
+  }
+  
 }
 
 /* ANIMATION */
