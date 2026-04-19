@@ -19,6 +19,11 @@ export default function JobCard({
     return `${Math.floor(diff / 86400)}d ago`;
   };
 
+  const handleApply = (e) => {
+  e.stopPropagation();
+  onApplyClick();
+};
+
   // 🔥 DATE LOGIC
   const now = new Date();
   const endDate = new Date(job.end_date);
@@ -62,15 +67,15 @@ export default function JobCard({
         </button>
       ) : (
         <button
+          type="button"
           className={`apply-btn ${isApplied ? "disabled" : ""}`}
           disabled={isApplied}
-          onClick={(e) => {
-            e.stopPropagation();
-            onApplyClick();
-          }}
+          onClick={handleApply}
+          onTouchStart={handleApply}
         >
           {isApplied ? "Applied" : "Apply Job"}
         </button>
+          
       )}
 
     </div>
