@@ -13,25 +13,32 @@ function Login() {
 
 const handleLogin = async () => {
   try {
-    const res = await api.post("/token/", {
-      username: loginId,
+    const res = await api.post("/login/", {
+      login_id: loginId,
       password: password,
     });
 
     const data = res.data;
 
-    // SAVE JWT TOKENS
+    // save tokens
     localStorage.setItem("access", data.access);
     localStorage.setItem("refresh", data.refresh);
 
-    // OPTIONAL: decode role later from backend or separate endpoint
-    localStorage.setItem("role", "student"); // temporary if needed
+    // save user + role
+    localStorage.setItem("role", data.user.role);
+    localStorage.setItem("user", JSON.stringify(data.user));
 
-    // redirect
-    navigate("/student-dashboard");
+    // redirect based on role
+    if (data.user.role === "student") {
+      navigate("/student-dashboard");
+    } else if (data.user.role === "employer") {
+      navigate("/employer-dashboard");
+    } else if (data.user.role === "admin") {
+      navigate("/admin-dashboard");
+    }
 
   } catch (err) {
-    alert(err.response?.data?.detail || "Login failed");
+    alert(err.response?.data?.error || "Login failed");
   }
 };
 
