@@ -21,17 +21,12 @@ export default function EmployerProfile() {
 
   const fetchProfile = async () => {
     try {
-      const res = await api.get("/employer-status/", { withCredentials: true });
-      const userRes = await api.get("/admin/employers/", { withCredentials: true });
+      const res = await api.get("/employer/profile/");
 
-      const current = userRes.data.find(
-        (u) => u.id === res.data.user_id
-      );
-
-      setProfile(current);
-      setForm(current);
+      setProfile(res.data);
+      setForm(res.data);
     } catch (err) {
-      console.error(err);
+      console.error("PROFILE ERROR:", err.response?.data || err.message);
     } finally {
       setLoading(false);
     }
