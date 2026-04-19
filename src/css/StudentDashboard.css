@@ -71,13 +71,13 @@ body {
   z-index: 9999;
 }
 
-.nav-left {
+.navbar .nav-left {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.nav-title {
+.navbar .nav-title {
   flex: 1;
   text-align: center;
   margin: 0;
@@ -209,7 +209,7 @@ body {
   .navbar {
     padding: 8px 12px; /* smaller height */
     position:sticky;
-      top: 0; 
+    top: 0; 
   }
 
   .logo img {

@@ -390,17 +390,20 @@
   .navbar {
     padding: 10px 15px;
     position:sticky;
+    top: 0; 
   }
 
 }
 
 @media (min-width: 800px){
 
+
   .nav-left{
     display: none;
   }
   .navbar{
     height: 75px;
+    position:sticky;
   }
 }
 
