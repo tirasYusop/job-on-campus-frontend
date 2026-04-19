@@ -214,7 +214,6 @@ body {
   .dashboard-main .logo img {
     height: 15px; /* smaller logo */
   }
-
   .dashboard-main .nav-title {
     font-size: 12px; /* smaller title */
     line-height: 1.2;
@@ -233,8 +232,38 @@ body {
   .dashboard-main-content {
     padding: 15px;
   }
+  .contact-btn {
+  bottom: 20px;
+  right: 20px;
+
+  /* 🔥 SAFE AREA FIX (important for iPhone) */
+  bottom: calc(20px + env(safe-area-inset-bottom));
+}
 
 }
 
+.contact-btn {
+  position: fixed;
+  bottom: calc(20px + env(safe-area-inset-bottom));
+  right: 20px;
+
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+
+  background: #22c55e;
+  color: white;
+  font-size: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  cursor: pointer;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  z-index: 9999;
+}
 
 

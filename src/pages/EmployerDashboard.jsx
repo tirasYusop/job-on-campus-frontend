@@ -283,7 +283,7 @@ return (
             <p>
               {verified
                 ? "Manage your jobs and applicants"
-                : "Please contact admin to verify your account"}
+                : "Please contact admin to verify your account. 014-203 2341 "}
             </p>
           </div>
 

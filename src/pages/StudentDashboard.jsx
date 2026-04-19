@@ -416,6 +416,15 @@ return (
           </div>
         </div>
       )}
+
+      <button
+      className="contact-btn"
+      onClick={() =>
+        window.open("https://wa.me/60142032341", "_blank")
+      }
+    >
+      💬
+    </button>
     </div>
   );
 }
