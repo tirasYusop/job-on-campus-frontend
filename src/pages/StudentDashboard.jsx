@@ -113,6 +113,14 @@ export default function StudentDashboard() {
   };
 
   useEffect(() => {
+  if (confirmJob || confirmCancel || selectedJob || feedbackAppId) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
+}, [confirmJob, confirmCancel, selectedJob, feedbackAppId]);
+
+  useEffect(() => {
     const handlePopState = () => {
       window.location.reload();
     };
@@ -293,19 +301,25 @@ return (
           </div>
         </div>
       )}
-
       {confirmJob && (
-        <div className="modal-overlay" onClick={() => setConfirmJob(null)}>
-          <div className="modal-card" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="modal-overlay"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setConfirmJob(null);
+            }
+          }}
+        >
+          <div className="modal-card">
             <h2>⚠️ Confirm Apply</h2>
             <h3>{confirmJob.job_type}</h3>
 
             <div className="modal-actions">
               <button
                 className="confirm-btn"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  applyJob(confirmJob.id);
+                onClick={async () => {
+                  const jobId = confirmJob.id;
+                  await applyJob(jobId);
                   setConfirmJob(null);
                 }}
               >
@@ -314,10 +328,7 @@ return (
 
               <button
                 className="cancel-btn"
-                onClick={(e) =>{
-                      e.stopPropagation();
-                      setConfirmJob(null);
-                } }
+                onClick={() => setConfirmJob(null)}
               >
                 No
               </button>
@@ -325,19 +336,25 @@ return (
           </div>
         </div>
       )}
-
       {confirmCancel && (
-        <div className="modal-overlay" onClick={(e) => { e.stopPropagation();setConfirmCancel(null)}}>
-          <div className="modal-card" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="modal-overlay"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setConfirmCancel(null);
+            }
+          }}
+        >
+          <div className="modal-card">
             <h2>Cancel Application?</h2>
 
             <div className="modal-actions">
               <button
                 className="confirm-btn"
-                onClick={(e) => {
-                  e.stopPropagation(); 
-                  cancelApplication(confirmCancel);
+                onClick={async () => {
+                  const id = confirmCancel;
                   setConfirmCancel(null);
+                  await cancelApplication(id);
                 }}
               >
                 Yes
@@ -345,9 +362,7 @@ return (
 
               <button
                 className="cancel-btn"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setConfirmCancel(null)}}
+                onClick={() => setConfirmCancel(null)}
               >
                 No
               </button>
