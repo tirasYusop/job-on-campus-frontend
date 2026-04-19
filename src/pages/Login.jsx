@@ -11,30 +11,29 @@ function Login() {
   const [loginId, setLoginId] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = async () => {
-      try {
-        const res = await api.post("/login/", {
-          login_id: loginId,
-          password: password
-        });
+const handleLogin = async () => {
+  try {
+    const res = await api.post("/token/", {
+      username: loginId,
+      password: password,
+    });
 
-        const data = res.data;
+    const data = res.data;
 
-        localStorage.setItem("role", data.role);
-        localStorage.setItem("user", JSON.stringify(data));
+    // SAVE JWT TOKENS
+    localStorage.setItem("access", data.access);
+    localStorage.setItem("refresh", data.refresh);
 
-        if (data.role === "admin") {
-          navigate("/admin-dashboard");
-        } else if (data.role === "student") {
-          navigate("/student-dashboard");
-        } else if (data.role === "employer") {
-          navigate("/employer-dashboard");
-        }
+    // OPTIONAL: decode role later from backend or separate endpoint
+    localStorage.setItem("role", "student"); // temporary if needed
 
-      } catch (err) {
-        alert(err.response?.data?.error || "Login failed");
-      }
-    };
+    // redirect
+    navigate("/student-dashboard");
+
+  } catch (err) {
+    alert(err.response?.data?.detail || "Login failed");
+  }
+};
 
   return (
     <div className="login-page">

@@ -34,7 +34,7 @@ function EmployerRegister() {
     if (!form.phone_number.trim()) return alert("Phone number is required");
 
     try {
-      await api.post(
+      const res = await api.post(
         "/employer-register/",
         {
           username: form.username.trim(),
@@ -43,20 +43,27 @@ function EmployerRegister() {
           full_name: form.full_name.trim(),
           company_name: form.company_name.trim(),
           phone_number: form.phone_number.trim()
-        },
-        {
-          withCredentials: true
         }
       );
 
-      alert("Employer registered & logged in!");
+      const data = res.data;
+
+      // ✅ STORE JWT TOKENS
+      localStorage.setItem("access", data.access);
+      localStorage.setItem("refresh", data.refresh);
+
+      // optional user info
+      localStorage.setItem("role", data.user.role);
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      alert("Employer registered successfully!");
+
       navigate("/employer-dashboard");
 
     } catch (err) {
       alert(err.response?.data?.error || "Registration failed");
     }
-  };
-
+  }; 
   return (
     <div className="emp-page">
       <div className="emp-card">

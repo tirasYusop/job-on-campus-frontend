@@ -22,33 +22,37 @@ function StudentRegister() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleRegister = async () => {
-    if (!form.email.endsWith("@iluv.ums.edu.my")) {
-      alert("Only UMS student email allowed");
-      return;
-    }
+const handleRegister = async () => {
+  if (!form.email.endsWith("@iluv.ums.edu.my")) {
+    alert("Only UMS student email allowed");
+    return;
+  }
 
-    try {
-      const res = await api.post(
-        "/student-register/",
-        form,
-        { withCredentials: true }
-      );
+  try {
+    const res = await api.post(
+      "/student-register/",
+      form
+    );
 
-      const data = res.data;
+    const data = res.data;
 
-      localStorage.setItem("role", data.role);
-      localStorage.setItem("user", JSON.stringify(data));
+    // ✅ SAVE JWT TOKENS
+    localStorage.setItem("access", data.access);
+    localStorage.setItem("refresh", data.refresh);
 
-      alert("Registration successful!");
+    // optional user info
+    localStorage.setItem("role", data.user.role);
+    localStorage.setItem("user", JSON.stringify(data.user));
 
-      navigate("/student-dashboard");
+    alert("Registration successful!");
 
-    } catch (err) {
-      console.log(err);
-      alert(err.response?.data?.error || "Registration failed");
-    }
-  };
+    navigate("/student-dashboard");
+
+  } catch (err) {
+    console.log(err);
+    alert(err.response?.data?.error || "Registration failed");
+  }
+};
 
   return (
     <div className="stu-page">
