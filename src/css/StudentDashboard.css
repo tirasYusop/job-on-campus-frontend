@@ -34,7 +34,7 @@ body {
   background: #356f73;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 100vh;
   overflow-y: auto;
 }
 /* =========================
@@ -204,7 +204,7 @@ body {
   .dashboard-body {
     flex-direction: column;
   }
-  
+
     .navbar {
     padding: 8px 12px; /* smaller height */
     position:sticky;
@@ -227,6 +227,7 @@ body {
   .notification-wrapper {
     width: 100%;
     min-width: 0;
+
   }
 
   .dashboard-main-content {
