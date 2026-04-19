@@ -364,6 +364,16 @@ return (
           <TermsAndConditions onClose={() => setShowTnc(false)} />
         )}
 
+        <button
+        className="contact-btn"
+        onClick={() =>
+          window.open("https://wa.me/60142032341", "_blank")
+        }
+      >
+        <FaPhone />
+        <span>Contact us</span>
+      </button>
+
       </div>
     </div>
   </div>
