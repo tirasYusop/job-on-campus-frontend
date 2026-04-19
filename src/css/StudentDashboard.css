@@ -35,7 +35,8 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  overflow-y: auto;
+  top: 0; 
+  position: sticky;
 }
 /* =========================
    MAIN AREA
@@ -205,9 +206,10 @@ body {
     flex-direction: column;
   }
 
-    .navbar {
+  .navbar {
     padding: 8px 12px; /* smaller height */
     position:sticky;
+      top: 0; 
   }
 
   .logo img {
@@ -227,6 +229,7 @@ body {
   .notification-wrapper {
     width: 100%;
     min-width: 0;
+    
 
   }
 
