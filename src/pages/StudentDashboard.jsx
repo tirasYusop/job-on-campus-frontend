@@ -303,7 +303,8 @@ return (
             <div className="modal-actions">
               <button
                 className="confirm-btn"
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation();
                   applyJob(confirmJob.id);
                   setConfirmJob(null);
                 }}
@@ -313,7 +314,10 @@ return (
 
               <button
                 className="cancel-btn"
-                onClick={() => setConfirmJob(null)}
+                onClick={(e) =>{
+                      e.stopPropagation();
+                      setConfirmJob(null);
+                } }
               >
                 No
               </button>
@@ -323,14 +327,15 @@ return (
       )}
 
       {confirmCancel && (
-        <div className="modal-overlay" onClick={() => setConfirmCancel(null)}>
+        <div className="modal-overlay" onClick={(e) => { e.stopPropagation();setConfirmCancel(null)}}>
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
             <h2>Cancel Application?</h2>
 
             <div className="modal-actions">
               <button
                 className="confirm-btn"
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation(); 
                   cancelApplication(confirmCancel);
                   setConfirmCancel(null);
                 }}
@@ -340,7 +345,9 @@ return (
 
               <button
                 className="cancel-btn"
-                onClick={() => setConfirmCancel(null)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setConfirmCancel(null)}}
               >
                 No
               </button>
