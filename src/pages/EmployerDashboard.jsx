@@ -8,7 +8,7 @@ import EmployerJobCard from "../component/Employer/EmployerJobCard";
 import JobApplicantsModal from "../component/Employer/JobApplicantsModal";
 import StudentCard from "../component/admin/StudentCard";
 import TermsAndConditions from "../component/TermsAndConditions"
-
+import { FaPhone } from "react-icons/fa";
 
 export default function EmployerDashboard() {
   const navigate = useNavigate();
