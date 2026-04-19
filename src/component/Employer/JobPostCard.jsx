@@ -86,7 +86,7 @@ export default function JobPostCard({
         />
 
         <input
-          type="number"
+          type="text"
           name="num_workers"
           placeholder="Number of Workers"
           value={formData.num_workers}
