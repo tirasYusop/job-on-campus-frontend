@@ -1,11 +1,3 @@
-.notification-wrapper {
-  width: 20%;
-  min-width: 260px;
-  background: #356f73;
-  display: flex;
-  flex-direction: column;
-  padding-top: 5px;
-}
 
 .notification-panel {
   flex: 1;
@@ -151,6 +143,6 @@
 /* hide overlay on desktop */
 @media (min-width: 769px) {
   .sidebar-overlay {
-    display: fixed;
+    display: none;
   }
 }

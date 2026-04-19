@@ -71,7 +71,6 @@ export default function JobCard({
           className={`apply-btn ${isApplied ? "disabled" : ""}`}
           disabled={isApplied}
           onClick={handleApply}
-          onTouchStart={handleApply}
         >
           {isApplied ? "Applied" : "Apply Job"}
         </button>
