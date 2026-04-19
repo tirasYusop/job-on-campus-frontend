@@ -387,7 +387,7 @@
     height: 15px; /* smaller logo */
   }
 
-  .navbar {
+  .empD-main .navbar {
     padding: 10px 15px;
     position:sticky;
     top: 0; 
@@ -396,8 +396,6 @@
 }
 
 @media (min-width: 800px){
-
-
   .nav-left{
     display: none;
   }
@@ -405,5 +403,10 @@
     height: 75px;
     position:sticky;
   }
+
+  .navbar .logo{
+    display: none;
+  }
+
 }
 

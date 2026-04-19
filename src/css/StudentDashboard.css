@@ -58,7 +58,7 @@ body {
 /* =========================
    NAVBAR
 ========================= */
-.navbar {
+.dashboard-main .navbar {
   width: 100%;
   background: #356f73;
   color: white;
@@ -71,13 +71,13 @@ body {
   z-index: 9999;
 }
 
-.navbar .nav-left {
+.dashboard-main .navbar .nav-left {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.navbar .nav-title {
+.dashboard-main .navbar .nav-title {
   flex: 1;
   text-align: center;
   margin: 0;
@@ -206,17 +206,17 @@ body {
     flex-direction: column;
   }
 
-  .navbar {
+  .dashboard-main .navbar {
     padding: 8px 12px; /* smaller height */
     position:sticky;
     top: 0; 
   }
 
-  .logo img {
+  .dashboard-main .logo img {
     height: 15px; /* smaller logo */
   }
 
-  .nav-title {
+  .dashboard-main .nav-title {
     font-size: 12px; /* smaller title */
     line-height: 1.2;
   }
@@ -229,8 +229,6 @@ body {
   .notification-wrapper {
     width: 100%;
     min-width: 0;
-    
-
   }
 
   .dashboard-main-content {
@@ -242,3 +240,6 @@ body {
   }
 
 }
+
+
+
