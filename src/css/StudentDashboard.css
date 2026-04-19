@@ -36,9 +36,7 @@ body {
   flex-direction: column;
   height: 100%;
   overflow-y: auto;
-  padding-top: 5px;
 }
-
 /* =========================
    MAIN AREA
 ========================= */
@@ -205,8 +203,8 @@ body {
 @media (max-width: 768px) {
   .dashboard-body {
     flex-direction: column;
-    
   }
+  
     .navbar {
     padding: 8px 12px; /* smaller height */
     position:sticky;

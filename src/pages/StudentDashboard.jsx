@@ -184,7 +184,7 @@ return (
 
   <div className="dashboard-body">
     <div
-      className={`notification-wrapper ${showSidebar ? "open" : "close"}`}
+      className={`notification-wrapper ${showSidebar ? "open" : ""}`}
     >
       <NotificationPanel
         openSection={openSection}

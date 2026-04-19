@@ -110,16 +110,12 @@
   .notification-wrapper {
     position: fixed;
     top: 0;
-    right: 0;
+    left: 0;
     width: 75%;
-    height: 100dvh;
-    background: #356f73;
+    height: 100vh;
     z-index: 2000;
-    transform: translateX(100%);
+    transform: translateX(-100%);
     transition: transform 0.3s ease;
-    overflow-y: auto;
-    margin-top: 30px;
-    margin-bottom: 30px;
   }
 
   .notification-wrapper.open {
@@ -131,7 +127,7 @@
     inset: 0;
     background: rgba(0,0,0,0.5);
     z-index: 1500;
-    column-wrap: auto;
+
   }
 
   .np-footer 
