@@ -134,7 +134,7 @@ function EmployersPage() {
         />
       )}
       {showJobsModal && (
-        <div className="modal-overlay" onClick={() => setShowJobsModal(false)}>
+        <div className="modal-overlayAdmin" onClick={() => setShowJobsModal(false)}>
           <div className="modal-box large" onClick={(e) => e.stopPropagation()}>
 
             <h2>Jobs Posted</h2>
