@@ -7,6 +7,7 @@ import TermsAndConditions from "../component/TermsAndConditions";
 import NotificationPanel from "../component/Dashboard/NotificationPanel";
 import JobCard from "../component/Dashboard/JobCard";
 import StudentResponsibilityPopup from "../component/StudentResponsibilityPopup";
+import { FaPhone } from "react-icons/fa";
 
 export default function StudentDashboard() {
   const [openSection, setOpenSection] = useState(null);
@@ -423,7 +424,8 @@ return (
         window.open("https://wa.me/60142032341", "_blank")
       }
     >
-      💬
+      <FaPhone />
+      <span>Contact us</span>
     </button>
     </div>
   );

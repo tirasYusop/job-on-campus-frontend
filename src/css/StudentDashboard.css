@@ -238,6 +238,10 @@ body {
 
   /* 🔥 SAFE AREA FIX (important for iPhone) */
   bottom: calc(20px + env(safe-area-inset-bottom));
+
+}
+.contact-btn span{
+  display: none;
 }
 
 }
@@ -247,23 +251,27 @@ body {
   bottom: calc(20px + env(safe-area-inset-bottom));
   right: 20px;
 
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-
   background: #22c55e;
   color: white;
-  font-size: 22px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
   border: none;
+  border-radius: 999px;
+
+  padding: 10px 16px; /* 🔥 important */
+  display: flex;
+  align-items: center;
+  gap: 8px; /* space between icon & text */
+
   cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
 
   box-shadow: 0 8px 20px rgba(0,0,0,0.25);
   z-index: 9999;
+  transition: 0.2s;
 }
 
+.contact-btn:hover {
+  transform: scale(1.05);
+}
 
