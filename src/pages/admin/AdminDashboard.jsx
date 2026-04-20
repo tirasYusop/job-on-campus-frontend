@@ -44,7 +44,7 @@ function AdminDashboard() {
       {/* NAVBAR */}
       <div className="admin-navbar">
         <div className="nav-title">
-          🛡️ <h3>Admin Panel</h3>
+         <h3> 🛡️ Admin Panel</h3>
         </div>
 
         <div className="nav-right">

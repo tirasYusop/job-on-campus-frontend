@@ -186,7 +186,10 @@ return (
     {showImgTnC && (
       <TermsImagePopup 
       image={imageStu}
-      onClose={()=> setShowImage(false)}
+      onClose={()=> {setShowImage(false); 
+                      setShowTnc(true);
+                    }
+                }
       />
     )}
 

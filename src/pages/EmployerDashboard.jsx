@@ -177,7 +177,9 @@ return (
     {showImgTnC && (
       <TermsImagePopup 
       image={imageEm}
-      onClose={()=> setShowImage(false)}
+      onClose={()=> {setShowImage(false); 
+                      setShowTnc(true);}
+      }
       />
     )}
     <EmployerResponsibilityPopup />
