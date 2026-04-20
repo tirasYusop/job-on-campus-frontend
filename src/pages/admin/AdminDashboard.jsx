@@ -5,55 +5,44 @@ import api from "../../api";
 
 function AdminDashboard() {
   const navigate = useNavigate();
-
-  const [employers, setEmployers] = useState([]);
   const [stats, setStats] = useState(null);
 
-  // AUTH
+  // AUTH CHECK
   useEffect(() => {
     const role = localStorage.getItem("role");
     if (role !== "admin") navigate("/login");
   }, [navigate]);
 
-  // LOGOUT
-  const handleLogout = async () => {
-    await api.post("/logout/");
-
-    localStorage.removeItem("role");
-    navigate("/");
-  };
-
-  // FETCH UNVERIFIED
-  /*const fetchEmployers = async () => {
-    const res = await api.get("/admin/employers/unverified/");
-    setEmployers(res.data);
-  };*/
-
   // FETCH STATS
-  const fetchStats = async () => {
-    const res = await api.get("/admin/full-report/");
-    setStats(res.data);
-  };
-
   useEffect(() => {
-    fetchEmployers();
-    fetchStats();
+    const fetchData = async () => {
+      try {
+        const res = await api.get("/admin/full-report/");
+        setStats(res.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchData();
   }, []);
 
- /* const verifyEmployer = async (id) => {
-    await api.post(`/admin/verify-employer/${id}/`);
-
-    alert("Employer verified!");
-    fetchEmployers();
-    fetchStats();
-  };*/
+  // LOGOUT
+  const handleLogout = async () => {
+    try {
+      await api.post("/logout/");
+      localStorage.removeItem("role");
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <div className="admin-page">
 
       {/* NAVBAR */}
       <div className="admin-navbar">
-
         <div className="nav-left">
           🛡️ <span>Admin Panel</span>
         </div>
@@ -63,7 +52,6 @@ function AdminDashboard() {
             Logout
           </button>
         </div>
-
       </div>
 
       {/* CONTENT */}
@@ -103,6 +91,7 @@ function AdminDashboard() {
           </div>
 
         </div>
+
       </div>
     </div>
   );
