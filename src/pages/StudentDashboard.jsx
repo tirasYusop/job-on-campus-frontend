@@ -8,7 +8,6 @@ import NotificationPanel from "../component/Dashboard/NotificationPanel";
 import JobCard from "../component/Dashboard/JobCard";
 import StudentResponsibilityPopup from "../component/StudentResponsibilityPopup";
 import { FaPhone } from "react-icons/fa";
-import StudentProfile from "../pages/StudentProfile";
 import TermsImagePopup from "../component/ImageTC";
 import imageStu from "../images/imageStu.png";
 
@@ -429,8 +428,6 @@ return (
           </div>
         </div>
       )}
-      {openProfile && (<StudentProfile setOpenProfile={setOpenProfile} /> )}
-
       <button
       className="contact-btn"
       onClick={() =>
