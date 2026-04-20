@@ -60,7 +60,7 @@ export default function StudentProfile() {
   return (
     <div className="profile-page">
 
-      <AdminNavbar title="🎓 Student Profile" backTo="/student-dashboard" />
+      <AdminNavbar title=" Student Profile" backTo="/student-dashboard" />
 
       <div className="profile-content">
         <div className="profile-card">

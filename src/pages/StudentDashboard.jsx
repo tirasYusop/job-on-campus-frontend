@@ -429,11 +429,7 @@ return (
           </div>
         </div>
       )}
-      {openProfile && (
-        <div className="modal-overlay">
-          <StudentProfile setOpenProfile={setOpenProfile} />
-        </div>
-      )}
+      {openProfile && (<StudentProfile setOpenProfile={setOpenProfile} /> )}
 
       <button
       className="contact-btn"

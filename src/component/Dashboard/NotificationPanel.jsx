@@ -123,9 +123,7 @@ export default function NotificationPanel({
         <div
           className="title profile"
           onClick={() => {
-            setSelectedJob(null); // optional reset
-            setShowSidebar(false);
-            setOpenProfile(true); // 
+            navigate("/student/student-profile");
           }}
         >
           👤 My Profile
