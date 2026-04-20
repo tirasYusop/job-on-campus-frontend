@@ -182,6 +182,7 @@ export default function StudentDashboard() {
 return (
   
   <div className="dashboard-layout">
+    
     {showImgTnC && (
       <TermsImagePopup 
       image={imageStu}

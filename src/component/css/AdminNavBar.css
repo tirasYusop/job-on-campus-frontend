@@ -10,6 +10,14 @@
   z-index: 10;
 }
 
+.admin-page .nav-title{
+  flex: 1;
+  text-align: center;
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
 .admin-back-btn {
   background: none;
   border: none;

@@ -43,8 +43,8 @@ function AdminDashboard() {
 
       {/* NAVBAR */}
       <div className="admin-navbar">
-        <div className="nav-left">
-          🛡️ <span>Admin Panel</span>
+        <div className="nav-title">
+          🛡️ <h3>Admin Panel</h3>
         </div>
 
         <div className="nav-right">
@@ -72,6 +72,11 @@ function AdminDashboard() {
           <div className="kpi-card">
             <h3>{stats?.total_employers || 0}</h3>
             <p>Employers</p>
+          </div>
+
+          <div className="kpi-card">
+            <h3>{stats?.total_jobs || 0}</h3>
+            <p>Jobs</p>
           </div>
 
         </div>
