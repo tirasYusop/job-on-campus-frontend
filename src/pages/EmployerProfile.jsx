@@ -95,11 +95,6 @@ export default function EmployerProfile() {
           disabled={!editMode}
         />
 
-        <p>
-          <b>Status:</b>{" "}
-          {profile.verified ? "Verified ✅" : "Pending ⏳"}
-        </p>
-
         <p><b>Total Jobs:</b> {profile.total_jobs}</p>
 
         {!editMode ? (

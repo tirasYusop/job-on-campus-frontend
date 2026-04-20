@@ -77,7 +77,7 @@ const handleLogin = async () => {
         <div className="login-card animate-card">
 
           <h2 className="login-title">🔐 Login</h2>
-          <p className="login-sub">Welcome to Job Campus, Please Sign In.</p>
+          <p className="login-sub">Welcome to Job On Campus, Please Sign In.</p>
 
           <div className="login-form">
 

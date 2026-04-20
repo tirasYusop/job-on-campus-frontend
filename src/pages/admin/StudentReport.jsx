@@ -15,9 +15,6 @@ function StudentsPage() {
 
   const [report, setReport] = useState([]);
 
-  // =========================
-  // FETCH DATA
-  // =========================
   useEffect(() => {
     api.get("/admin/students/")
       .then(res => {

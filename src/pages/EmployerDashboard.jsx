@@ -12,8 +12,6 @@ import { FaPhone } from "react-icons/fa";
 
 export default function EmployerDashboard() {
   const navigate = useNavigate();
-
-  const [verified, setVerified] = useState(false);
   const [jobs, setJobs] = useState([]);
   const [selectedJob, setSelectedJob] = useState(null);
   const [selectedStudent, setSelectedStudent] = useState(null);
@@ -24,17 +22,6 @@ export default function EmployerDashboard() {
   const isExpired = (job) => {
   return new Date(job.end_date) < new Date();
 };
-  const fetchVerificationStatus = async () => {
-    try {
-      const res = await api.get("/employer-status/", {
-        withCredentials: true,
-      });
-      setVerified(res.data.verified);
-    } catch (err) {
-      console.error(err);
-      setVerified(false);
-    }
-  };
 
   const fetchJobs = async () => {
     try {
@@ -61,11 +48,9 @@ export default function EmployerDashboard() {
 }, []);
 
   useEffect(() => {
-    fetchVerificationStatus();
     fetchJobs();
 
     const interval = setInterval(() => {
-      fetchVerificationStatus();
       fetchJobs();
     }, 5000);
 
@@ -85,10 +70,6 @@ export default function EmployerDashboard() {
   };
 
   const handlePostJob = () => {
-    if (!verified) {
-      alert("Your account is not verified yet.");
-      return;
-    }
     navigate("/employer/job-form");
   };
 
@@ -275,22 +256,12 @@ return (
         {/* 🔹 HERO */}
         <div className="empD-hero">
           <div>
-            <h2>
-              {verified
-                ? "Verified Employer ✅"
-                : "Pending Verification ⏳"}
-            </h2>
-            <p>
-              {verified
-                ? "Manage your jobs and applicants"
-                : "Please contact admin to verify your account. 014-203 2341 "}
-            </p>
+            <p> "Manage your jobs and applicants"</p>
           </div>
 
           <button
             className="empD-post"
             onClick={handlePostJob}
-            disabled={!verified}
           >
             ➕ Post Job
           </button>

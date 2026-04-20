@@ -9,14 +9,11 @@ function EmployersPage() {
   const [employers, setEmployers] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [status, setStatus] = useState("ALL");
-
   const [selectedEmployer, setSelectedEmployer] = useState(null);
   const [employerJobs, setEmployerJobs] = useState([]);
   const [showJobsModal, setShowJobsModal] = useState(false);
+  const [search, setSearch] = useState("");
 
-  // =========================
-  // FETCH DATA
-  // =========================
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -32,14 +29,20 @@ function EmployersPage() {
   }, []);
 
   useEffect(() => {
-    if (status === "ALL") {
-      setFiltered(employers);
-    } else if (status === "VERIFIED") {
-      setFiltered(employers.filter(e => e.verified));
-    } else {
-      setFiltered(employers.filter(e => !e.verified));
-    }
-  }, [status, employers]);
+    const delay = setTimeout(() => {
+      const keyword = search.toLowerCase();
+
+      const result = employers.filter((e) =>
+        e.full_name?.toLowerCase().includes(keyword) ||
+        e.company_name?.toLowerCase().includes(keyword) ||
+        e.email?.toLowerCase().includes(keyword)
+      );
+
+      setFiltered(result);
+    }, 300);
+
+    return () => clearTimeout(delay);
+  }, [search, employers]);
 
   const fetchEmployerDetails = async (id) => {
   try {
@@ -73,15 +76,13 @@ function EmployersPage() {
       <div className="contain-page">
 
       {/* FILTER */}
-      <select
-        value={status}
-        onChange={(e) => setStatus(e.target.value)}
-        className="filter-dropdown"
-      >
-        <option value="ALL">All</option>
-        <option value="VERIFIED">Verified</option>
-        <option value="UNVERIFIED">Unverified</option>
-      </select>
+      <input
+        type="text"
+        placeholder="Search employer "
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        className="filter-input"
+      />
 
       {/* TABLE */}
       <div className="table-container">
@@ -91,7 +92,6 @@ function EmployersPage() {
               <th>Company</th>
               <th>Username</th>
               <th>Phone</th>
-              <th>Status</th>
               <th>Total Jobs</th>
             </tr>
           </thead>
@@ -106,11 +106,6 @@ function EmployersPage() {
                 <td>{e.company_name}</td>
                 <td>{e.username}</td>
                 <td>{e.phone_number}</td>
-                
-
-                <td>
-                  {e.verified ? "✅ Verified" : "❌ Unverified"}
-                </td>
 
                 <td
                   style={{ color: "#3498db", fontWeight: "bold", cursor: "pointer" }}

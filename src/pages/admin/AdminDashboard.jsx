@@ -24,10 +24,10 @@ function AdminDashboard() {
   };
 
   // FETCH UNVERIFIED
-  const fetchEmployers = async () => {
+  /*const fetchEmployers = async () => {
     const res = await api.get("/admin/employers/unverified/");
     setEmployers(res.data);
-  };
+  };*/
 
   // FETCH STATS
   const fetchStats = async () => {
@@ -40,13 +40,13 @@ function AdminDashboard() {
     fetchStats();
   }, []);
 
-  const verifyEmployer = async (id) => {
+ /* const verifyEmployer = async (id) => {
     await api.post(`/admin/verify-employer/${id}/`);
 
     alert("Employer verified!");
     fetchEmployers();
     fetchStats();
-  };
+  };*/
 
   return (
     <div className="admin-page">
@@ -86,11 +86,6 @@ function AdminDashboard() {
             <p>Employers</p>
           </div>
 
-          <div className="kpi-card danger">
-            <h3>{employers.length}</h3>
-            <p>Pending Verification</p>
-          </div>
-
         </div>
 
         <div className="quick-actions">
@@ -108,32 +103,6 @@ function AdminDashboard() {
           </div>
 
         </div>
-
-        <h2 className="section-title">⛔ Pending Employers ⛔</h2>
-
-        <div className="grid">
-
-          {employers.length === 0 ? (
-            <p className="empty">No pending employers 🎉</p>
-          ) : (
-            employers.slice(0, 4).map((emp) => (
-              <div key={emp.id} className="emp-card">
-                <h3>{emp.company_name}</h3>
-                <p>👤 {emp.username}</p>
-                <p>📞 {emp.phone_number}</p>
-
-                <button
-                  className="verify-btn"
-                  onClick={() => verifyEmployer(emp.id)}
-                >
-                  ✅ Verify
-                </button>
-              </div>
-            ))
-          )}
-
-        </div>
-
       </div>
     </div>
   );
