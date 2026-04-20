@@ -27,6 +27,7 @@ const handleLogin = async () => {
     // save user + role
     localStorage.setItem("role", data.user.role);
     localStorage.setItem("user", JSON.stringify(data.user));
+    localStorage.setItem("showTermsPopup","false")
 
     // redirect based on role
     if (data.user.role === "student") {
@@ -41,6 +42,8 @@ const handleLogin = async () => {
     alert(err.response?.data?.error || "Login failed");
   }
 };
+
+
 
   return (
     <div className="login-page">

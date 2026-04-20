@@ -25,7 +25,7 @@ export default function StudentDashboard() {
   const [feedbackText, setFeedbackText] = useState("");
   const [pastJobs, setPastJobs] = useState([]);
   const [showTnc, setShowTnc] = useState(false);
-  const [showImgTnC, setShowImage] = useState(true);
+  const [showImgTnC, setShowImage] = useState(false);
 
   
 
@@ -42,6 +42,13 @@ export default function StudentDashboard() {
       job.location.toLowerCase().includes(keyword)
     );
   });
+
+  useEffect(()=> {
+    const shouldShow = localStorage.getItem("showTermsPopup");
+    if (shouldShow === "false"){
+      setShowImage(true);
+    }
+  }, []);
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -188,6 +195,7 @@ return (
       image={imageStu}
       onClose={()=> {setShowImage(false); 
                       setShowTnc(true);
+                      localStorage.setItem("showTermsPopup","true")
                     }
                 }
       />
