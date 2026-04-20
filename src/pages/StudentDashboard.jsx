@@ -9,7 +9,6 @@ import JobCard from "../component/Dashboard/JobCard";
 import StudentResponsibilityPopup from "../component/StudentResponsibilityPopup";
 import { FaPhone } from "react-icons/fa";
 import StudentProfile from "../pages/StudentProfile";
-import tncImage from "../images/tnc.jpg";
 import TermsImagePopup from "../component/ImageTC";
 import imageStu from "../images/imageStu.png";
 
