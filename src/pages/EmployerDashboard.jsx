@@ -174,10 +174,10 @@ export default function EmployerDashboard() {
 
 return (
   <div className="empD-page">
-    {showImageTC && (
+    {showImgTnC && (
       <TermsImagePopup 
       image={imageEm}
-      onClose={()=> setShowImageTC(false)}
+      onClose={()=> setShowImage(false)}
       />
     )}
     <EmployerResponsibilityPopup />

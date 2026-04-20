@@ -184,10 +184,10 @@ export default function StudentDashboard() {
 return (
   
   <div className="dashboard-layout">
-    {showImageTC && (
+    {showImgTnC && (
       <TermsImagePopup 
       image={imageStu}
-      onClose={()=> setShowImageTC(false)}
+      onClose={()=> setShowImage(false)}
       />
     )}
 
