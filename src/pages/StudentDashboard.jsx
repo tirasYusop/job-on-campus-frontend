@@ -16,7 +16,6 @@ export default function StudentDashboard() {
   const [openSection, setOpenSection] = useState(null);
   const navigate = useNavigate();
   const [showSidebar, setShowSidebar] = useState(false);
-
   const [jobs, setJobs] = useState([]);
   const [applications, setApplications] = useState([]);
   const [selectedJob, setSelectedJob] = useState(null);
@@ -28,6 +27,7 @@ export default function StudentDashboard() {
   const [pastJobs, setPastJobs] = useState([]);
   const [showTnc, setShowTnc] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
+  const [showImgTnC, setShowImage] = useState(true);
 
   
 
@@ -184,7 +184,12 @@ export default function StudentDashboard() {
 return (
   
   <div className="dashboard-layout">
-    <TermsImagePopup src={imageStu}/>
+    {showImageTC && (
+      <TermsImagePopup 
+      image={imageStu}
+      onClose={()=> setShowImageTC(false)}
+      />
+    )}
 
     <StudentResponsibilityPopup />
 
@@ -276,7 +281,6 @@ return (
       )}
 
       {showTnc && <TermsAndConditions onClose={() => setShowTnc(false)} />}
-
       {feedbackAppId && (
         <div
           className="modal-overlay"

@@ -9,6 +9,9 @@ import JobApplicantsModal from "../component/Employer/JobApplicantsModal";
 import StudentCard from "../component/admin/StudentCard";
 import TermsAndConditions from "../component/TermsAndConditions"
 import { FaPhone } from "react-icons/fa";
+import imageEm from "../images/imageEm.png"
+import TermsImagePopup from "../component/ImageTC";
+
 
 export default function EmployerDashboard() {
   const navigate = useNavigate();
@@ -19,6 +22,7 @@ export default function EmployerDashboard() {
   const [complaintAppId, setComplaintAppId] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [ShowTnc,   setShowTnc,] = useState(false);
+  const [showImgTnC, setShowImage] = useState(true);
   const isExpired = (job) => {
   return new Date(job.end_date) < new Date();
 };
@@ -170,6 +174,12 @@ export default function EmployerDashboard() {
 
 return (
   <div className="empD-page">
+    {showImageTC && (
+      <TermsImagePopup 
+      image={imageEm}
+      onClose={()=> setShowImageTC(false)}
+      />
+    )}
     <EmployerResponsibilityPopup />
 
     <div className="empD-layout">
