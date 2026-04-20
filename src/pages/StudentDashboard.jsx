@@ -8,6 +8,10 @@ import NotificationPanel from "../component/Dashboard/NotificationPanel";
 import JobCard from "../component/Dashboard/JobCard";
 import StudentResponsibilityPopup from "../component/StudentResponsibilityPopup";
 import { FaPhone } from "react-icons/fa";
+import StudentProfile from "../pages/StudentProfile";
+import tncImage from "../images/tnc.jpg";
+import TermsImagePopup from "../component/ImageTC";
+import imageStu from "../images/imageStu.png";
 
 export default function StudentDashboard() {
   const [openSection, setOpenSection] = useState(null);
@@ -24,6 +28,9 @@ export default function StudentDashboard() {
   const [feedbackText, setFeedbackText] = useState("");
   const [pastJobs, setPastJobs] = useState([]);
   const [showTnc, setShowTnc] = useState(false);
+  const [openProfile, setOpenProfile] = useState(false);
+
+  
 
   const toggleSection = (section) => {
     setOpenSection(openSection === section ? null : section);
@@ -175,9 +182,10 @@ export default function StudentDashboard() {
       .map((a) => Number(a.job_id))
   );
 
-
 return (
+  
   <div className="dashboard-layout">
+    <TermsImagePopup src={imageStu}/>
 
     <StudentResponsibilityPopup />
 
@@ -200,6 +208,7 @@ return (
         setFeedbackAppId={setFeedbackAppId}
         setShowTnc={setShowTnc}
         setShowSidebar={setShowSidebar}
+        setOpenProfile={setOpenProfile} 
         handleLogout={handleLogout}
       />
     </div>
@@ -415,6 +424,11 @@ return (
               Close
             </button>
           </div>
+        </div>
+      )}
+      {openProfile && (
+        <div className="modal-overlay">
+          <StudentProfile setOpenProfile={setOpenProfile} />
         </div>
       )}
 

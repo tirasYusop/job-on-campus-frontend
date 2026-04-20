@@ -102,6 +102,7 @@ const handleRegister = async () => {
           />
 
           <input
+            type="number"
             name="no_telefon"
             placeholder="Phone Number"
             onChange={handleChange}
@@ -109,7 +110,7 @@ const handleRegister = async () => {
           />
 
           <select
-            name="fakulti"
+            name="Fakulti"
             onChange={handleChange}
             className="stu-input"
           >
@@ -129,7 +130,7 @@ const handleRegister = async () => {
           </select>
 
           <select
-            name="kolej"
+            name="Kolej"
             onChange={handleChange}
             className="stu-input"
           >

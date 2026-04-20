@@ -15,7 +15,8 @@ export default function NotificationPanel({
   setFeedbackAppId,
   setShowTnc,
   setShowSidebar,
-  handleLogout, // 👈 ADD THIS
+  handleLogout, 
+  setOpenProfile 
 }) {
   return (
     <div className="notification-panel">
@@ -119,6 +120,16 @@ export default function NotificationPanel({
 
       {/* FOOTER (LOGOUT FIXED BOTTOM) */}
       <div className="np-footer">
+        <div
+          className="title profile"
+          onClick={() => {
+            setSelectedJob(null); // optional reset
+            setShowSidebar(false);
+            setOpenProfile(true); // 👈 ADD THIS STATE
+          }}
+        >
+          👤 My Profile
+        </div>
         <button className="logout-btnNoti" onClick={handleLogout}>
            Logout
         </button>

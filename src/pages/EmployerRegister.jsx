@@ -22,37 +22,42 @@ function EmployerRegister() {
     });
   };
 
-  const handleRegister = async () => {
-    if (!form.username.trim()) return alert("Username is required");
-    if (!form.email.trim()) return alert("Email is required");
-    if (!form.email.includes("@")) return alert("Invalid email format");
-    if (!form.password.trim()) return alert("Password is required");
-    if (form.password.length < 6) return alert("Password must be at least 6 characters");
+  const validate = () => {
+    if (!form.username.trim()) return "Username is required";
+    if (!form.email.trim()) return "Email is required";
+    if (!form.email.includes("@")) return "Invalid email format";
+    if (!form.password.trim()) return "Password is required";
+    if (form.password.length < 6) return "Password must be at least 6 characters";
+    if (!form.full_name.trim()) return "Full name is required";
+    if (!form.company_name.trim()) return "Company name is required";
+    if (!form.phone_number.trim()) return "Phone number is required";
+    if (!/^[0-9]{10,15}$/.test(form.phone_number))
+      return "Phone number must be 10–15 digits";
 
-    if (!form.full_name.trim()) return alert("Full name is required");
-    if (!form.company_name.trim()) return alert("Company name is required");
-    if (!form.phone_number.trim()) return alert("Phone number is required");
+    return null;
+  };
+
+  const handleRegister = async () => {
+    const error = validate();
+    if (error) return alert(error);
 
     try {
-      const res = await api.post(
-        "/employer-register/",
-        {
-          username: form.username.trim(),
-          email: form.email.trim(),
-          password: form.password,
-          full_name: form.full_name.trim(),
-          company_name: form.company_name.trim(),
-          phone_number: form.phone_number.trim()
-        }
-      );
+      const res = await api.post("/employer-register/", {
+        username: form.username.trim(),
+        email: form.email.trim(),
+        password: form.password,
+        full_name: form.full_name.trim(),
+        company_name: form.company_name.trim(),
+        phone_number: form.phone_number.trim()
+      });
 
       const data = res.data;
 
-      // ✅ STORE JWT TOKENS
+      // store tokens
       localStorage.setItem("access", data.access);
       localStorage.setItem("refresh", data.refresh);
 
-      // optional user info
+      // store user
       localStorage.setItem("role", data.user.role);
       localStorage.setItem("user", JSON.stringify(data.user));
 
@@ -63,7 +68,8 @@ function EmployerRegister() {
     } catch (err) {
       alert(err.response?.data?.error || "Registration failed");
     }
-  }; 
+  };
+
   return (
     <div className="emp-page">
       <div className="emp-card">
@@ -73,23 +79,56 @@ function EmployerRegister() {
 
         <div className="emp-form">
 
-          <input name="email" type="email" placeholder="Email"
-            value={form.email} onChange={handleChange} className="emp-input" />
+          <input
+            name="email"
+            type="email"
+            placeholder="Email"
+            value={form.email}
+            onChange={handleChange}
+            className="emp-input"
+          />
 
-          <input name="username" placeholder="Username"
-            value={form.username} onChange={handleChange} className="emp-input" />
+          <input
+            name="username"
+            placeholder="Username"
+            value={form.username}
+            onChange={handleChange}
+            className="emp-input"
+          />
 
-          <input type="password" name="password" placeholder="Password"
-            value={form.password} onChange={handleChange} className="emp-input" />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={form.password}
+            onChange={handleChange}
+            className="emp-input"
+          />
 
-          <input name="full_name" placeholder="Full Name"
-            value={form.full_name} onChange={handleChange} className="emp-input" />
+          <input
+            name="full_name"
+            placeholder="Full Name"
+            value={form.full_name}
+            onChange={handleChange}
+            className="emp-input"
+          />
 
-          <input name="company_name" placeholder="Company Name"
-            value={form.company_name} onChange={handleChange} className="emp-input" />
+          <input
+            name="company_name"
+            placeholder="Company Name"
+            value={form.company_name}
+            onChange={handleChange}
+            className="emp-input"
+          />
 
-          <input name="phone_number" placeholder="Phone Number"
-            value={form.phone_number} onChange={handleChange} className="emp-input" />
+          <input
+            type="number"
+            name="phone_number"
+            placeholder="Phone Number"
+            value={form.phone_number}
+            onChange={handleChange}
+            className="emp-input"
+          />
 
         </div>
 
