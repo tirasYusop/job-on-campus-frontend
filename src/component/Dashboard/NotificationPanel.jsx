@@ -1,7 +1,6 @@
 import React from "react";
 import "../css/NotificationPanel.css";
 import logo from "../../images/LOGOMPP.png";
-import StudentProfile from "../../pages/StudentProfile";
 import { useNavigation } from "react-router-dom";
 
 export default function NotificationPanel({
@@ -18,7 +17,7 @@ export default function NotificationPanel({
   setShowTnc,
   setShowSidebar,
   handleLogout, 
-  setOpenProfile 
+ 
 }) {
   const navigate = useNavigation();
   return (

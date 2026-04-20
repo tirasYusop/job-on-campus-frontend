@@ -25,7 +25,6 @@ export default function StudentDashboard() {
   const [feedbackText, setFeedbackText] = useState("");
   const [pastJobs, setPastJobs] = useState([]);
   const [showTnc, setShowTnc] = useState(false);
-  const [openProfile, setOpenProfile] = useState(false);
   const [showImgTnC, setShowImage] = useState(true);
 
   
@@ -211,7 +210,6 @@ return (
         setFeedbackAppId={setFeedbackAppId}
         setShowTnc={setShowTnc}
         setShowSidebar={setShowSidebar}
-        setOpenProfile={setOpenProfile} 
         handleLogout={handleLogout}
       />
     </div>
