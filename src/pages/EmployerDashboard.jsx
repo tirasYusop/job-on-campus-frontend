@@ -22,7 +22,7 @@ export default function EmployerDashboard() {
   const [complaintAppId, setComplaintAppId] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [ShowTnc,   setShowTnc,] = useState(false);
-  const [showImgTnC, setShowImage] = useState(true);
+  const [showImgTnC, setShowImage] = useState(false);
   const isExpired = (job) => {
   return new Date(job.end_date) < new Date();
 };
@@ -38,6 +38,13 @@ export default function EmployerDashboard() {
       setJobs([]);
     }
   };
+
+  useEffect(()=> {
+    const shouldShow = localStorage.getItem("showTermsPopup");
+    if (shouldShow === "false"){
+      setShowImage(true);
+    }
+  }, []);
 
   useEffect(() => {
   const handlePopState = () => {
@@ -178,7 +185,8 @@ return (
       <TermsImagePopup 
       image={imageEm}
       onClose={()=> {setShowImage(false); 
-                      setShowTnc(true);}
+                      setShowTnc(true);
+                    localStorage.setItem("showTermsPopup","true")}
       }
       />
     )}

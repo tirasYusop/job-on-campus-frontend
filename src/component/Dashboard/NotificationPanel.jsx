@@ -91,12 +91,14 @@ export default function NotificationPanel({
 
         {openSection === "past" &&
           (pastJobs.length === 0 ? (
+            
             <p>No past jobs</p>
           ) : (
             pastJobs.map((a) => (
-              <div key={a.id}>
+              <div key={a.id} className="pending-item">
                 <span>✔ {a.job_type}</span>
                 <button
+                className="feedback-mini-btn"
                   onClick={() => {
                     setFeedbackAppId(a.id);
                     setShowSidebar(false);

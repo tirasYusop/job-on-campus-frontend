@@ -60,6 +60,7 @@ function EmployerRegister() {
       // store user
       localStorage.setItem("role", data.user.role);
       localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("showTermsPopup","false")
 
       alert("Employer registered successfully!");
 

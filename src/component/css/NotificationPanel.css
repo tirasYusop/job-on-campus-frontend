@@ -103,6 +103,16 @@
   background: #dc2626;
 }
 
+.feedback-mini-btn{
+  font-size: 12px;
+  background: rgb(30, 38, 161);
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 /* =========================
    MOBILE SIDEBAR
 ========================= */
