@@ -23,7 +23,7 @@ export default function StudentProfile() {
 
   const fetchProfile = async () => {
     try {
-      const res = await api.get("/student/student-profile/"); // 🔥 backend endpoint needed
+      const res = await api.get("/student/student-profile");
 
       setProfile(res.data);
       setForm(res.data);
@@ -43,7 +43,7 @@ export default function StudentProfile() {
 
   const handleSave = async () => {
     try {
-      await api.put("/student/update-student-profile/", form, {
+      await api.put("/student/update-student-profile", form, {
         withCredentials: true
       });
 

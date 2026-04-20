@@ -22,7 +22,7 @@
 .sidebar {
   width: 20%;
   min-width: 260px;
-  background: #356f73;
+  background: #0f2644;
   color: white;
   display: flex;
   flex-direction: column;
@@ -101,7 +101,7 @@
 ========================= */
 .navbar {
   width: 100%;
-  background: #356f73;
+  background: #0f2644;
   color: white;
   padding: 15px 30px;
   display: flex;

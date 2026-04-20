@@ -125,7 +125,7 @@ export default function NotificationPanel({
           onClick={() => {
             setSelectedJob(null); // optional reset
             setShowSidebar(false);
-            setOpenProfile(true); // 👈 ADD THIS STATE
+            setOpenProfile(true); // 
           }}
         >
           👤 My Profile

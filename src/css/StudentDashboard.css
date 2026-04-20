@@ -31,7 +31,7 @@ body {
 .notification-wrapper {
   width: 20%;
   min-width: 260px;
-  background: #356f73;
+  background: #0f2644;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -59,7 +59,7 @@ body {
 ========================= */
 .dashboard-main .navbar {
   width: 100%;
-  background: #356f73;
+  background: #0f2644;
   color: white;
   padding: 15px 30px;
   display: flex;
@@ -214,8 +214,8 @@ body {
   .dashboard-main .logo img {
     height: 15px; /* smaller logo */
   }
-  .dashboard-main .nav-title {
-    font-size: 12px; /* smaller title */
+  .dashboard-main .navbar .nav-title {
+    font-size: 14px; /* smaller title */
     line-height: 1.2;
   }
 
