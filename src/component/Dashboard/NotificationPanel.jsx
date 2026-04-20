@@ -125,7 +125,7 @@ export default function NotificationPanel({
         <div
           className="title profile"
           onClick={() => {
-            navigate("/student/student-profile");
+            navigate("/student/StudentProfile");
           }}
         >
           👤 My Profile
