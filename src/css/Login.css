@@ -20,12 +20,6 @@
   animation: fadeUp 0.5s ease forwards;
 }
 
-.login-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 50px;
-}
 
 .welcome-box {
   width: 380px;
@@ -50,15 +44,28 @@
   line-height: 1.6;
 }
 
-.welcome-image {
-  width: auto;
-  height: auto;
-  max-width: 160px;   /* controls size */
-  max-height: 160px;
-  object-fit: contain;
-  display: block;
-  margin: 0 auto 15px;
+
+.login-container {
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  gap: 25px;
+}
+
+/* logo styling */
+.login-logo {
+  width: 90px;
+  height: auto;
+  object-fit: contain;
+  margin-top: 10px;
+}
+
+/* optional wrapper */
+.logo-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .welcome-box ul {

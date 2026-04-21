@@ -51,13 +51,14 @@ const handleLogin = async () => {
 
       <TermsPopup />
 
-      <img
-        src={logo} alt="Logo"
-        className="welcome-image"
-      />
+      
 
       {/* WRAPPER */}
       <div className="login-container">
+
+          <div className="logo-wrapper">
+            <img src={logo} alt="Logo" className="login-logo" />
+          </div>
 
         <div className="welcome-box">
   
