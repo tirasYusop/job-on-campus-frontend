@@ -57,7 +57,6 @@ const handleLogin = async () => {
         <div className="welcome-box">
            <img
             src={logo} alt="Logo"
-            alt="Job on Campus"
             className="welcome-image"
           />
 
