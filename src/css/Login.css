@@ -91,6 +91,11 @@
 }
 
 @media (max-width: 900px) {
+
+  .login-page{
+    align-items: flex-start;
+    padding-top: 30px;
+  }
   .login-container {
     flex-direction: column;
     gap: 15px;
