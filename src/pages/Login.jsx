@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/Login.css";
+import logo from "../images/LOGOMPP.png";
 import api from "../api";
 import TermsPopup from "../component/TermsPopup";
 
@@ -54,6 +55,12 @@ const handleLogin = async () => {
       <div className="login-container">
 
         <div className="welcome-box">
+           <img
+            src={logo} alt="Logo"
+            alt="Job on Campus"
+            className="welcome-image"
+          />
+
           <h1>🎓 Welcome to</h1>
           <h2>Job On Campus UMS</h2>
 
