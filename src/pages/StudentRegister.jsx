@@ -111,7 +111,7 @@ const handleRegister = async () => {
           />
 
           <select
-            name="Fakulti"
+            name="fakulti"
             onChange={handleChange}
             className="stu-input"
           >
@@ -128,10 +128,11 @@ const handleRegister = async () => {
             <option value="fpks">FPKS</option>
             <option value="astif">ASTIF</option>
             <option value="fpep">FPEP</option>
+            <option value="asasi">ASASI</option>
           </select>
 
           <select
-            name="Kolej"
+            name="kolej"
             onChange={handleChange}
             className="stu-input"
           >
