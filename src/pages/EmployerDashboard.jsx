@@ -7,7 +7,7 @@ import EmployerResponsibilityPopup from "../component/EmployerResponsibilityPopu
 import EmployerJobCard from "../component/Employer/EmployerJobCard";
 import JobApplicantsModal from "../component/Employer/JobApplicantsModal";
 import StudentCard from "../component/admin/StudentCard";
-import TermsAndConditions from "../component/TermsAndConditions"
+import TermsAndConditionsEmployer from "../component/TermsAndConditionsEmployer"
 import { FaPhone } from "react-icons/fa";
 import imageEm from "../images/imageEm.png"
 import TermsImagePopup from "../component/ImageTC";
@@ -352,7 +352,7 @@ return (
 
         {/* 🔹 TERMS */}
         {ShowTnc && (
-          <TermsAndConditions onClose={() => setShowTnc(false)} />
+          <TermsAndConditionsEmployer onClose={() => setShowTnc(false)} />
         )}
 
         <button
