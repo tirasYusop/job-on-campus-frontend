@@ -41,8 +41,14 @@ const handleRegister = async () => {
     localStorage.setItem("refresh", data.refresh);
 
     // optional user info
-    localStorage.setItem("role", data.user.role);
-    localStorage.setItem("user", JSON.stringify(data.user));
+    localStorage.setItem("role", data.role);
+
+    localStorage.setItem("user", JSON.stringify({
+      id: data.user_id,
+      username: data.username,
+      email: data.email,
+      role: data.role
+    }));
     localStorage.setItem("showTermsPopup","false")
 
     alert("Registration successful!");
