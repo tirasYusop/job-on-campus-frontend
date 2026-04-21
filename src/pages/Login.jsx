@@ -51,14 +51,16 @@ const handleLogin = async () => {
 
       <TermsPopup />
 
+      <img
+        src={logo} alt="Logo"
+        className="welcome-image"
+      />
+
       {/* WRAPPER */}
       <div className="login-container">
 
         <div className="welcome-box">
-           <img
-            src={logo} alt="Logo"
-            className="welcome-image"
-          />
+  
 
           <h1>🎓 Welcome to</h1>
           <h2>Job On Campus UMS</h2>
