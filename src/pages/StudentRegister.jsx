@@ -28,6 +28,11 @@ const handleRegister = async () => {
     return;
   }
 
+  if (form.password.length < 6) {
+  alert("Password must be at least 6 characters");
+  return;
+}
+
   try {
     const res = await api.post(
       "/student-register/",
