@@ -53,7 +53,7 @@ export default function JobCard({
         </div>
       </div>
 
-      <p>📍 LOCATION {job.location}</p>
+      <p>📍 LOCATION: {job.location}</p>
       <p>📅 DATE: {job.start_date} SEHINGGA {job.end_date}</p>
       <p>🕒 TIME: {job.work_time}</p>
       <p>💰 SALARY: {job.salary_estimate}</p>
