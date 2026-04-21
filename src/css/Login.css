@@ -94,7 +94,7 @@
 
   .login-page{
     align-items: flex-start;
-    padding-top: 30px;
+    padding-top: 100px;
   }
   .login-container {
     flex-direction: column;
