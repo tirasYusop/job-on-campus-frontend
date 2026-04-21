@@ -51,16 +51,15 @@
 }
 
 .welcome-image {
-  width: 120px;
-  height: 120px;
+  width: auto;
+  height: auto;
+  max-width: 160px;   /* controls size */
+  max-height: 160px;
   object-fit: contain;
-  margin-bottom: 15px;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-  border-radius: 12px;
+  margin: 0 auto 15px;
 }
+
 .welcome-box ul {
   margin-top: 15px;
   padding-left: 18px;
