@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/EmployerRegister.css";
-import api from "../api";
+import api from "../../api";
 
 function EmployerRegister() {
   const navigate = useNavigate();

@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/StudentDashboard.css";
 import logo from "../images/LOGOMPP.png";
-import api from "../api";
-import TermsAndConditions from "../component/TermsAndConditions";
-import NotificationPanel from "../component/Dashboard/NotificationPanel";
-import JobCard from "../component/Dashboard/JobCard";
-import StudentResponsibilityPopup from "../component/StudentResponsibilityPopup";
+import api from "../../api";
+import TermsAndConditions from "../../component/TermsAndConditions";
+import NotificationPanel from "../../component/Dashboard/NotificationPanel";
+import JobCard from "../../component/Dashboard/JobCard";
+import StudentResponsibilityPopup from "../../component/StudentResponsibilityPopup";
 import { FaPhone } from "react-icons/fa";
-import TermsImagePopup from "../component/ImageTC";
+import TermsImagePopup from "../../component/ImageTC";
 import imageStu from "../images/imageStu.png";
 
 export default function StudentDashboard() {

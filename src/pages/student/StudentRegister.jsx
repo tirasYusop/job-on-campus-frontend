@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/StudentRegister.css";
 
-import api from "../api";
+import api from "../../api";
 
 function StudentRegister() {
   const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import api from "../api";
+import api from "../../api";
 import "../css/Profile.css";
-import AdminNavbar from "../component/admin/AdminNavBar";
+import AdminNavbar from "../../component/admin/AdminNavBar";
 
 export default function EmployerProfile() {
   const [profile, setProfile] = useState(null);

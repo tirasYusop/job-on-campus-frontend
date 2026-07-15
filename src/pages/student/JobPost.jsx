@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../css/JobPost.css";
-import api from "../api";
-import JobPostCard from "../component/Employer/JobPostCard";
+import api from "../../api";
+import JobPostCard from "../../component/Employer/JobPostCard";
 
 const emptyForm = {
   job_type: "",

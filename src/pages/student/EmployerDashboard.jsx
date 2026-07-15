@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/EmployerDashboard.css";
 import logo from "../images/LOGOMPP.png";
-import api from "../api";
-import EmployerResponsibilityPopup from "../component/EmployerResponsibilityPopup";
-import EmployerJobCard from "../component/Employer/EmployerJobCard";
-import JobApplicantsModal from "../component/Employer/JobApplicantsModal";
-import StudentCard from "../component/admin/StudentCard";
-import TermsAndConditionsEmployer from "../component/TermsAndConditionsEmployer"
+import api from "../../api";
+import EmployerResponsibilityPopup from "../../component/EmployerResponsibilityPopup";
+import EmployerJobCard from "../../component/Employer/EmployerJobCard";
+import JobApplicantsModal from "../../component/Employer/JobApplicantsModal";
+import StudentCard from "../../component/admin/StudentCard";
+import TermsAndConditionsEmployer from "../../component/TermsAndConditionsEmployer"
 import { FaPhone } from "react-icons/fa";
 import imageEm from "../images/imageEm.png"
-import TermsImagePopup from "../component/ImageTC";
+import TermsImagePopup from "../../component/ImageTC";
 
 
 export default function EmployerDashboard() {

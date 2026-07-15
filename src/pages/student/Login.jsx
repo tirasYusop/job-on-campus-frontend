@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/Login.css";
 import logo from "../images/LOGOMPP.png";
-import api from "../api";
-import TermsPopup from "../component/TermsPopup";
+import api from "../../api";
+import TermsPopup from "../../component/TermsPopup";
 
 
 function Login() {
